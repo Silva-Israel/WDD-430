@@ -119,6 +119,15 @@ export const MOCKCONTACTS: Contact[] = [
     imageUrl: '../../assets/images/thompsonda.jpg',
     group: null
   },
+// index 99
+  {
+    id: '99',
+    name: 'Israel Silva',
+    email: 'sil15019@byui.edu',
+    phone: '208-419-7793',
+    imageUrl: '../../assets/images/silvai.jpg',
+    group: null
+  },
 
   // teams
   // index 13

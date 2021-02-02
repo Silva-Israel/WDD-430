@@ -21,7 +21,7 @@ export class ContactService {
 
   getContact(id: string): Contact {
     for(let contact of this.contacts) {
-      if(contact.id = id) {
+      if(contact.id === id) {
         return contact;
       }
     }

@@ -1,4 +1,5 @@
 import { EventEmitter, Injectable } from '@angular/core';
+import { Contact } from '../contacts/contact.model';
 
 import { Message } from './message.model';
 import { MOCKMESSAGES } from './MOCKMESSAGES';
@@ -9,7 +10,7 @@ import { MOCKMESSAGES } from './MOCKMESSAGES';
 export class MessageService {
   messageChangedEvent = new EventEmitter<Message[]>();
 
-  private messages: Message[] = [];
+  messages: Message[] = [];
 
   constructor() {
     this.messages = MOCKMESSAGES;

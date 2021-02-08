@@ -4,10 +4,10 @@
     </div>
     <div class="col-md-4">
         <cms-contact-detail
-            *ngIf="selectedContact; else infoText"
+            *ngIf="selectedContact"
             [contact]="selectedContact"></cms-contact-detail>
-            <ng-template #infoText>
+            <!-- <ng-template #infoText>
                 <p>Please select a Contact!</p>
-            </ng-template>
+            </ng-template> -->
     </div>
 </div>

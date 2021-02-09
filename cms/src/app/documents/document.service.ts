@@ -8,7 +8,7 @@ import { MOCKDOCUMENTS } from './MOCKDOCUMENTS';
 export class DocumentService {
   documentSelectedEvent = new EventEmitter<Document>();
 
-  documents: Document[];
+  documents: Document[] = [];
 
   constructor() {
     this.documents = MOCKDOCUMENTS;
@@ -19,11 +19,6 @@ export class DocumentService {
   }
 
   getDocument(id: String): Document {
-    this.documents.forEach(document => {
-      if(document.id === id) {
-        return document;
-      }
-    });
-    return null;
+    return this.documents.find((document) => document.id === id);
   }
 }

@@ -10,8 +10,8 @@
             class="col-md-6"
           />
           <div class="col-md-6">
-            <button id="btn" class="btn btn-primary">Edit</button>
-            <button id="btn" class="btn btn-danger">Delete</button>
+            <a [routerLink]="['edit']" id="btn" class="btn btn-primary">Edit</a>
+            <a (click)="onDelete()" id="btn" class="btn btn-danger">Delete</a>
           </div>
         </div>
       </div>

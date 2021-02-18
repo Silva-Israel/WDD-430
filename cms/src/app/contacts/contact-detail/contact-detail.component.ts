@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ContactEditComponent } from '../contact-edit/contact-edit.component';
 
 import { Contact } from '../contact.model';
 import { ContactService } from '../contact.service';
@@ -12,14 +13,13 @@ import { ContactService } from '../contact.service';
 export class ContactDetailComponent implements OnInit {
   contact: Contact;
   id: string;
+  group: Contact[] = [];
 
   constructor(
     private contactService: ContactService,
     private router: Router,
     private route: ActivatedRoute
-    ) {
-
-    }
+    ) { }
 
   ngOnInit() {
     this.route.params

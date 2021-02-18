@@ -91,4 +91,8 @@ export class ContactService {
     var contactsListClone = this.contacts.slice();
     this.contactListChanged.next(contactsListClone);
   }
+
+  addToGroup() {
+
+  }
 }

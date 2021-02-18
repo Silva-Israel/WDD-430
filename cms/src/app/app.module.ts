@@ -22,6 +22,7 @@ import { ContactService } from './contacts/contact.service';
 import { DocumentService } from './documents/document.service';
 import { MessageService } from './messages/message.service';
 import { ContactEditComponent } from './contacts/contact-edit/contact-edit.component';
+import { DndModule } from 'ng2-dnd';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { ContactEditComponent } from './contacts/contact-edit/contact-edit.compo
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    DndModule.forRoot()
   ],
   providers: [ContactService, DocumentService, MessageService],
   bootstrap: [AppComponent]

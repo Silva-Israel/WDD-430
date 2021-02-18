@@ -9,28 +9,35 @@ import { Recipe } from "./recipe.model";
 export class RecipeService {
   recipesChanged = new Subject<Recipe[]>();
 
-  private recipes: Recipe[] = [
-    new Recipe(
-      'Chicken Curry',
-      'A delicious Indian dish',
-      'https://hips.hearstapps.com/del.h-cdn.co/assets/17/31/1501791674-delish-chicken-curry-horizontal.jpg?crop=1xw:1xh;center,top&resize=768:*',
-      [
-        new Ingredient('Rice', 1),
-        new Ingredient('Chicken', 2),
-        new Ingredient('Onion', 1)
-      ]),
-    new Recipe(
-      'Pudim',
-      'A tasty Brazilian dessert',
-      'https://img.itdg.com.br/tdg/images/recipes/000/031/593/318825/318825_original.jpg?mode=crop&width=710&height=400',
-      [
-        new Ingredient('Condensed milk', 2),
-        new Ingredient('Whole milk', 1),
-        new Ingredient('Powdered milk', 1)
-      ])
-  ];
+  // private recipes: Recipe[] = [
+  //   new Recipe(
+  //     'Chicken Curry',
+  //     'A delicious Indian dish',
+  //     'https://hips.hearstapps.com/del.h-cdn.co/assets/17/31/1501791674-delish-chicken-curry-horizontal.jpg?crop=1xw:1xh;center,top&resize=768:*',
+  //     [
+  //       new Ingredient('Rice', 1),
+  //       new Ingredient('Chicken', 2),
+  //       new Ingredient('Onion', 1)
+  //     ]),
+  //   new Recipe(
+  //     'Pudim',
+  //     'A tasty Brazilian dessert',
+  //     'https://img.itdg.com.br/tdg/images/recipes/000/031/593/318825/318825_original.jpg?mode=crop&width=710&height=400',
+  //     [
+  //       new Ingredient('Condensed milk', 2),
+  //       new Ingredient('Whole milk', 1),
+  //       new Ingredient('Powdered milk', 1)
+  //     ])
+  // ];
+
+  private recipes: Recipe[] = [];
 
   constructor(private slService: ShoppingListService) {}
+
+  setRecipes(recipes: Recipe[]) {
+    this.recipes = recipes;
+    this.recipesChanged.next(this.recipes.slice());
+  }
 
   getRecipes() {
     return this.recipes.slice();

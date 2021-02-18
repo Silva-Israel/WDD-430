@@ -1,0 +1,7 @@
+input.ng-invalid {
+  border: 1px solid red;
+}
+
+#alert {
+  margin-top: 20px;
+}

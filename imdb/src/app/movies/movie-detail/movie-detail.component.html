@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="col-md-12">{{ movie?.title }}</h4>
+        <div class="row">
+          <img
+            [src]="movie?.imageUrl"
+            alt="{{ movie?.title }}"
+            class="col-md-6"
+          />
+          <div class="col-md-6">
+            <a [routerLink]="['edit']" id="btn" class="btn btn-primary" (click)="onEditMovie()">Edit</a>
+            <a id="btn" class="btn btn-danger" (click)="onDelete()">Delete</a>
+          </div>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="pull-left">
+              <p><strong>Description: </strong>{{ movie?.description }}</p>
+              <p><strong>Director: </strong>{{ movie?.director }}</p>
+              <strong *ngIf="movie?.cast">Cast: </strong>
+              <ul>
+                <li
+                  *ngFor="let actor of movie?.cast">
+                  {{ actor?.name }}
+                </li>
+              </ul>
+              <p><strong>Rating: </strong>{{ movie?.rating }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

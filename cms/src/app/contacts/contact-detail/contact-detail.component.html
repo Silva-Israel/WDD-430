@@ -21,7 +21,9 @@
             <div class="pull-left">
               <h4>Email: {{ contact?.email }}</h4>
               <h4>Phone: {{ contact?.phone }}</h4>
-              <h4>Group: {{ contact?.group }}</h4>
+              <h4
+                *ngIf="contact?.group"
+                >Group: {{ contact?.group }}</h4>
             </div>
           </div>
         </div>

@@ -85,7 +85,7 @@ export class ContactEditComponent implements OnInit {
     this.groupContacts.push(selectedContact);
     this.contact.group = this.groupContacts;
 
-    console.log(this.contact);
+    console.log(this.contact.group);
   }
 
   onRemoveItem(index: number) {

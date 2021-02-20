@@ -1,0 +1,129 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <form
+      [formGroup]="movieForm"
+      (ngSubmit)="onSubmit()">
+
+      <div class="row">
+        <div class="col-sm-12 form-group">
+          <label for="title">Title:</label>
+          <input
+            type="text"
+            id="title"
+            class="form-control required"
+            size="120"
+            max="120"
+            formControlName="title">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12 form-group">
+          <label for="imageUrl">Image URL:</label>
+          <input
+            type="text"
+            id="imageUrl"
+            class="form-control"
+            size="150"
+            max="255"
+            formControlName="imageUrl"
+            #imageUrl/>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <img [src]="imageUrl.value" class="image-responsive" style="max-height: 300px;" />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12 form-group">
+          <label for="email">Description:</label>
+          <textarea
+            type="text"
+            id="description"
+            class="form-control required"
+            size="120"
+            max="255"
+            formControlName="description"
+            rows="6"
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12 form-group">
+          <label for="phone">Director:</label>
+          <input
+            type="text"
+            id="director"
+            class="form-control invalid"
+            size="150"
+            max="255"
+            formControlName="director"/>
+        </div>
+      </div>
+
+      <label for="cast">Cast:</label>
+      <div class="row">
+        <div class="col-xs-12" formArrayName="cast">
+          <div
+            class="row"
+            *ngFor="let movieControl of controls; let i = index"
+            [formGroupName]="i">
+            <div class="col-xs-8">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="name"/>
+            </div>
+            <div class="col-xs-2">
+              <button
+                type="button"
+                class="btn btn-danger"
+                (click)="onDeleteActor()">X</button>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-xs-12">
+              <button
+                type="button"
+                class="btn btn-success"
+                (click)="onAddActor()">Add Actor</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12 form-group">
+          <label for="phone">Rating:</label>
+          <input
+            type="text"
+            id="rating"
+            name="rating"
+            class="form-control invalid"
+            size="150"
+            max="255"
+            formControlName="rating"
+            #rating/>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12 btn-toolbar">
+          <button
+            class="btn btn-success"
+            type="submit"
+            [disabled]="movieForm.invalid">Save</button>
+          <button
+            class="btn btn-primary"
+            type="button"
+            (click)="onCancel()">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

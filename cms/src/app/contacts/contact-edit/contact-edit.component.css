@@ -1,9 +1,4 @@
-
-.required.ng-invalid {
-  border: 1px solid red;
-}
-
-.invalid.ng-invalid.ng-dirty {
+input.ng-invalid.ng-touched {
   border: 1px solid red;
 }
 
@@ -31,3 +26,4 @@
   color: darkgrey;
   margin-left: 3rem;
 }
+

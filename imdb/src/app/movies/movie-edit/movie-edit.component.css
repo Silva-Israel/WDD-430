@@ -1,0 +1,16 @@
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
+#rating-div {
+  margin-top: 15px;
+}
+
+#add-btn {
+  margin-top: 10px;
+}
+
+#add-input {
+  margin-top: 5px;
+}

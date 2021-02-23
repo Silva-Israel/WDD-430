@@ -9,7 +9,7 @@
             type="text"
             id="name"
             name="name"
-            class="form-control required"
+            class="form-control"
             size="120"
             max="120"
             [ngModel]="contact?.name"
@@ -26,7 +26,7 @@
             type="text"
             id="email"
             name="email"
-            class="form-control required"
+            class="form-control"
             size="120"
             max="255"
             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
@@ -35,9 +35,6 @@
           />
         </div>
       </div>
-      <div class="alert alert-danger" *ngIf="email.touched && email.invalid">
-        Enter a valid email address.
-      </div>
       <div class="row">
         <div class="col-sm-12 form-group">
           <label for="phone">Phone:</label>
@@ -45,7 +42,7 @@
             type="text"
             id="phone"
             name="phone"
-            class="form-control invalid"
+            class="form-control"
             size="150"
             max="255"
             pattern="\D*([2-9]\d{2})(\D*)([2-9]\d{2})(\D*)(\d{4})\D*"
@@ -76,9 +73,7 @@
       <div class="row">
         <div class="col-sm-12 form-group">
           <label for="groupList">Group Contacts:</label>
-          <div
-            class="alert alert-danger"
-            *ngIf="">
+          <div class="alert alert-danger" *ngIf="">
             Contact is already in the group or is the current contact.
           </div>
           <div
@@ -87,7 +82,8 @@
             style="min-height: 3rem"
             dnd-droppable
             [dropZones]="['contactGroup']"
-            (onDropSuccess)="addToGroup($event)">
+            (onDropSuccess)="addToGroup($event)"
+          >
             <div *ngFor="let contact of groupContacts; let i = index">
               <div>
                 <cms-contact-item
@@ -108,21 +104,17 @@
           </div>
         </div>
       </div>
-      <div
-        class="alert alert-danger"
-        *ngIf="(name.touched && name.invalid) || (email.touched && email.invalid)">
+      <div class="alert alert-danger" *ngIf="name.touched && name.invalid">
         The Name and Email fields are required.
       </div>
       <div class="row">
         <div class="col-xs-12 btn-toolbar">
-          <button
-            class="btn btn-success"
-            type="submit"
-            [disabled]="!f.valid">Save</button>
-          <button
-            class="btn btn-primary"
-            type="button"
-            (click)="onCancel()">Cancel</button>
+          <button class="btn btn-success" type="submit" [disabled]="!f.valid">
+            Save
+          </button>
+          <button class="btn btn-primary" type="button" (click)="onCancel()">
+            Cancel
+          </button>
         </div>
       </div>
     </form>

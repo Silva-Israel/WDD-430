@@ -39,7 +39,7 @@
 
       <div class="row">
         <div class="col-sm-12 form-group">
-          <label for="email">Description:</label>
+          <label for="description">Description:</label>
           <textarea
             type="text"
             id="description"
@@ -54,7 +54,7 @@
 
       <div class="row">
         <div class="col-sm-12 form-group">
-          <label for="phone">Director:</label>
+          <label for="director">Director:</label>
           <input
             type="text"
             id="director"
@@ -72,8 +72,9 @@
             class="row"
             *ngFor="let movieControl of controls; let i = index"
             [formGroupName]="i">
-            <div class="col-xs-8">
+            <div class="col-xs-10">
               <input
+                id="add-input"
                 type="text"
                 class="form-control"
                 formControlName="name"/>
@@ -82,13 +83,13 @@
               <button
                 type="button"
                 class="btn btn-danger"
-                (click)="onDeleteActor()">X</button>
+                (click)="onDeleteActor(i)">X</button>
             </div>
           </div>
-          <hr>
           <div class="row">
             <div class="col-xs-12">
               <button
+                id="add-btn"
                 type="button"
                 class="btn btn-success"
                 (click)="onAddActor()">Add Actor</button>
@@ -97,18 +98,17 @@
         </div>
       </div>
 
-      <div class="row">
+      <div id="rating-div" class="row">
         <div class="col-sm-12 form-group">
-          <label for="phone">Rating:</label>
-          <input
-            type="text"
-            id="rating"
-            name="rating"
-            class="form-control invalid"
-            size="150"
-            max="255"
-            formControlName="rating"
-            #rating/>
+          <label for="rating">Rating:</label>
+          <star-rating
+            value="1"
+            totalstars="{{ totalstar }}"
+            checkedcolor="gold"
+            uncheckedcolor="black"
+            size="24px"
+            readonly="false">
+          </star-rating>
         </div>
       </div>
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { RatingModule } from 'ng-starrating';
 
 import { Movie } from '../movie.model';
 import { MovieService } from '../movie.service';
@@ -12,6 +13,8 @@ import { MovieService } from '../movie.service';
 export class MovieDetailComponent implements OnInit {
   movie: Movie;
   id: number;
+  url: string;
+  totalstar: number = 10;
 
   constructor(
     private movieService: MovieService,
@@ -26,7 +29,9 @@ export class MovieDetailComponent implements OnInit {
         this.id = +params['id'];
         this.movie = this.movieService.getMovie(this.id);
         }
-      )
+      );
+
+    this.url = 'https://www.imdb.com/find?q=';
   }
 
   onEditMovie() {
@@ -36,5 +41,9 @@ export class MovieDetailComponent implements OnInit {
   onDelete() {
     this.movieService.deleteMovie(this.id);
     this.router.navigateByUrl('movies');
+  }
+
+  onRate() {
+
   }
 }

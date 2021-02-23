@@ -11,6 +11,7 @@ import { MovieEditComponent } from './movies/movie-edit/movie-edit.component';
 import { MovieItemComponent } from './movies/movie-item/movie-item.component';
 import { MovieService } from './movies/movie.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RatingModule } from 'ng-starrating';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     FormsModule,
+    RatingModule,
     ReactiveFormsModule,
     AppRoutingModule
   ],

@@ -65,4 +65,8 @@ export class MovieService {
     this.movies.splice(index, 1);
     this.movieListChanged.next(this.movies.slice());
   }
+
+  rateMovie() {
+
+  }
 }

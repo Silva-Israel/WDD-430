@@ -1,8 +1,8 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
-import { MOCKCONTACTS } from './MOCKCONTACTS';
 import { Contact } from './contact.model';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -11,13 +11,12 @@ export class ContactService {
   contactSelectedEvent = new EventEmitter<Contact>();
   contactChangedEvent = new EventEmitter<Contact[]>();
   contactListChanged = new Subject<Contact[]>();
-
   contacts: Contact[] = [];
   maxContactId: number;
+  url: string = 'https://israelsilva-cms.firebaseio.com/contacts.json'
 
-  constructor() {
-    this.contacts = MOCKCONTACTS;
-    this.maxContactId = this.getMaxId();
+  constructor(private http: HttpClient) {
+    this.getContacts();
   }
 
   getMaxId(): number {
@@ -35,8 +34,29 @@ export class ContactService {
     return maxId;
   }
 
-  getContacts(): Contact[] {
-    return this.contacts.slice();
+  storeContacts() {
+    const contacts = JSON.stringify(this.contacts);
+    this.http.put('https://israelsilva-cms.firebaseio.com/contacts.json', contacts)
+    .subscribe(() => {
+        this.contactListChanged.next([...this.contacts]);
+    });
+}
+
+  getContacts() {
+    this.http
+      .get<Contact[]>(
+        this.url)
+      .subscribe(
+        (contacts: Contact[]) => {
+          this.contacts = contacts;
+          this.maxContactId = this.getMaxId();
+          contacts.sort();
+          this.contactListChanged.next(this.contacts.slice());
+        },
+        (error: any) => {
+          console.log(error);
+        }
+      );
   }
 
   getContact(id: string): Contact {
@@ -54,11 +74,10 @@ export class ContactService {
     }
 
     this.maxContactId++
-
     this.maxContactId = +newContact.id;
     this.contacts.push(newContact);
-    var contactsListsClone = this.contacts.slice();
-    this.contactListChanged.next(contactsListsClone);
+
+    this.storeContacts();
   }
 
   updateContact(originalContact: Contact, newContact: Contact) {

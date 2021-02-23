@@ -15,6 +15,7 @@ import { MessageItemComponent } from './messages/message-item/message-item.compo
 import { MessageEditComponent } from './messages/message-edit/message-edit.component';
 import { MessageListComponent } from './messages/message-list/message-list.component';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { DropdownDirective } from './dropdown.directive';
 import { AppRoutingModule } from './app-routing.module';
 import { DocumentEditComponent } from './documents/document-edit/document-edit.component';
@@ -46,6 +47,7 @@ import { DndModule } from 'ng2-dnd';
   imports: [
     BrowserModule,
     FormsModule,
+    HttpClientModule,
     AppRoutingModule,
     DndModule.forRoot()
   ],

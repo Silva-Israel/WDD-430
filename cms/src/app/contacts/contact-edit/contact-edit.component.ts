@@ -41,13 +41,17 @@ export class ContactEditComponent implements OnInit {
 
           this.editMode = true;
           this.contact = JSON.parse(JSON.stringify(this.originalContact));
+
+          if(this.contact.group) [
+            this.groupContacts = this.contact.group.slice()
+          ]
         }
       );
   }
 
   onSubmit(form: NgForm) {
     const value = form.value;
-    const newContact = new Contact(value.id, value.name, value.email, value.phone, value.imageUrl, value.group);
+    const newContact = new Contact(value.id, value.name, value.email, value.phone, value.imageUrl, this.groupContacts);
 
     if(this.editMode) {
       this.contactService.updateContact(this.originalContact, newContact);
@@ -84,8 +88,6 @@ export class ContactEditComponent implements OnInit {
     }
     this.groupContacts.push(selectedContact);
     this.contact.group = this.groupContacts;
-
-    console.log(this.contact.group);
   }
 
   onRemoveItem(index: number) {

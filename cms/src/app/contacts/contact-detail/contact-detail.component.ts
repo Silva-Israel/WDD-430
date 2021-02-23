@@ -13,7 +13,7 @@ import { ContactService } from '../contact.service';
 export class ContactDetailComponent implements OnInit {
   contact: Contact;
   id: string;
-  group: Contact[] = [];
+  groupContacts: Contact[];
 
   constructor(
     private contactService: ContactService,

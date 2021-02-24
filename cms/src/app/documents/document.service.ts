@@ -47,7 +47,7 @@ export class DocumentService {
         () => {
           this.documentListChangedEvent.next(this.documents.slice());
         }
-      )
+      );
   }
 
   getDocuments() {
@@ -55,12 +55,14 @@ export class DocumentService {
       .get<Document[]>(
         this.url)
       .subscribe(
+        // Success method
         (documents: Document[]) => {
           this.documents = documents;
           this.maxDocumentId = this.getMaxId();
           documents.sort();
           this.documentListChangedEvent.next(this.documents.slice());
         },
+        // Error method
         (error: any) => {
           console.log(error);
         }
@@ -76,13 +78,11 @@ export class DocumentService {
       return;
     }
 
-    this.maxDocumentId++
+    this.maxDocumentId++;
+    newDocument.id = this.maxDocumentId.toString();
 
-    this.maxDocumentId = +newDocument.id;
     this.documents.push(newDocument);
-    var documentsListClone = this.documents.slice();
 
-    //this.documentListChangedEvent.next(documentsListClone);
     this.storeDocuments();
   }
 
@@ -115,8 +115,8 @@ export class DocumentService {
     }
 
     this.documents.splice(pos, 1);
-    var documentsListClone = this.documents.slice();
 
+    //var documentsListClone = this.documents.slice();
     //this.documentListChangedEvent.next(documentsListClone);
     this.storeDocuments();
   }

@@ -64,6 +64,7 @@ export class MessageService {
           console.log(error);
         }
       );
+    return this.messages;
   }
 
   getMessage(id: string): Message {
@@ -76,9 +77,14 @@ export class MessageService {
   }
 
   addMessage(message: Message) {
-    this.messages.push(message);
+    if(!message) {
+      return;
+    }
 
-    //this.messageChangedEvent.emit(this.messages.slice());
+    this.maxMessageId++;
+    message.id = this.maxMessageId.toString();
+
+    this.messages.push(message);
     this.storeMessages();
   }
 }

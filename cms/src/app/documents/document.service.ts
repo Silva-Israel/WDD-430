@@ -67,6 +67,7 @@ export class DocumentService {
           console.log(error);
         }
       );
+    return this.documents;
   }
 
   getDocument(id: String): Document {

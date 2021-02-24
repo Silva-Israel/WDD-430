@@ -9,7 +9,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class ContactService {
   contactSelectedEvent = new EventEmitter<Contact>();
-  contactChangedEvent = new EventEmitter<Contact[]>();
   contactListChanged = new Subject<Contact[]>();
   contacts: Contact[] = [];
   maxContactId: number;
@@ -66,6 +65,7 @@ export class ContactService {
           console.log(error);
         }
       );
+      return this.contacts;
   }
 
   getContact(id: string): Contact {

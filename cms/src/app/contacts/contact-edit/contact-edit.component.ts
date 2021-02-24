@@ -58,7 +58,7 @@ export class ContactEditComponent implements OnInit {
     } else {
       this.contactService.addContact(newContact);
     }
-    this.router.navigate(['/contacts'], { relativeTo: this.route });
+    this.router.navigate(['/contacts', newContact.id], { relativeTo: this.route });
   }
 
   onCancel() {

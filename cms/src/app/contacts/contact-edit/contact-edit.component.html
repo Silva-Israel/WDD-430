@@ -74,8 +74,9 @@
         <div class="col-sm-12 form-group">
           <label for="groupList">Group Contacts:</label>
           <div
+            id="inGroup"
             class="alert alert-danger"
-            *ngIf="">
+            *ngIf="invalidGroupContact === true">
             Contact is already in the group or is the current contact.
           </div>
           <div
@@ -84,8 +85,7 @@
             style="min-height: 3rem"
             dnd-droppable
             [dropZones]="['contactGroup']"
-            (onDropSuccess)="addToGroup($event)"
-          >
+            (onDropSuccess)="addToGroup($event)">
             <div *ngFor="let contact of groupContacts; let i = index">
               <div>
                 <cms-contact-item

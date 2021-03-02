@@ -7,7 +7,6 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { StarRatingComponent } from 'ng-starrating';
-import { RatingModule } from 'ng-starrating';
 
 import { MovieService } from '../movie.service';
 
@@ -104,7 +103,7 @@ export class MovieEditComponent implements OnInit {
   }
 
 
-  onRate($event:{oldValue:number, newValue:number, starRating:StarRatingComponent}) {
+  onRate($event:{oldValue: number, newValue: number, starRating: StarRatingComponent}) {
     alert(`Old Value:${$event.oldValue},
       New Value: ${$event.newValue},
       Checked Color: ${$event.starRating.checkedcolor},

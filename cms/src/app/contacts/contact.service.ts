@@ -125,7 +125,4 @@ export class ContactService {
     this.storeContacts();
   }
 
-  addToGroup() {
-
-  }
 }

@@ -5,12 +5,12 @@ import { ContactService } from '../contact.service';
 @Component({
   selector: 'cms-contact-item',
   templateUrl: './contact-item.component.html',
-  styleUrls: ['./contact-item.component.css']
+  styleUrls: ['./contact-item.component.css'],
 })
 export class ContactItemComponent implements OnInit {
   @Input() contact: Contact;
 
-  constructor(private contactService: ContactService) { }
+  constructor(private contactService: ContactService) {}
 
   ngOnInit() {
     this.contactService.contactSelectedEvent.emit(this.contact);

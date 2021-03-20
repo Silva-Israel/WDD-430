@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { ContactEditComponent } from '../contact-edit/contact-edit.component';
 
 import { Contact } from '../contact.model';
 import { ContactService } from '../contact.service';
@@ -28,7 +27,7 @@ export class ContactDetailComponent implements OnInit {
           this.id = params.id;
           this.contact = this.contactService.getContact(this.id);
         }
-      )
+      );
   }
 
   onDelete() {

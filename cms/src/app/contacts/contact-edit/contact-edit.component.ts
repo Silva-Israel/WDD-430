@@ -11,7 +11,7 @@ import { ContactService } from '../contact.service';
 })
 export class ContactEditComponent implements OnInit {
   originalContact: Contact;
-  contact: Contact;
+  contact: Contact = null;
   groupContacts: Contact[] = [];
   editMode: boolean = false;
   id: string;
@@ -23,24 +23,27 @@ export class ContactEditComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
-  ngOnInit() {
-    this.route.params.subscribe((params: Params) => {
-      this.id = params.id;
-      if (!params.id) {
-        this.editMode = false;
-        return;
-      }
-      this.originalContact = this.contactService.getContact(this.id);
+  ngOnInit(): void {
+    this.route.params.subscribe(
+      (params: Params) => {
+        this.id = params.id;
+        if (!params.id) {
+          this.editMode = false;
+          return;
+        }
 
-      if (!this.originalContact) {
-        return;
-      }
+        this.originalContact = this.contactService.getContact(this.id);
 
-      this.editMode = true;
-      this.contact = JSON.parse(JSON.stringify(this.originalContact));
+        if (!this.originalContact) {
+          return;
+        }
 
-      if (this.contact.group)
-        [(this.groupContacts = this.contact.group.slice())];
+        this.editMode = true;
+        this.contact = JSON.parse(JSON.stringify(this.originalContact));
+
+        if (this.contact.group) {
+          this.groupContacts = this.contact.group.slice();
+        }
     });
   }
 

@@ -1,18 +1,17 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
-import { Contact } from '../contacts/contact.model';
 
 import { Message } from './message.model';
-import { MOCKMESSAGES } from './MOCKMESSAGES';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MessageService {
   messageChangedEvent = new EventEmitter<Message[]>();
-  messages: Message[] = [];
+  private messages: Message[] = [];
+
   maxMessageId: number;
-  url: string = 'https://israelsilva-cms.firebaseio.com/messages.json'
+  url: string = 'http://localhost:3000/messages/';
 
   constructor(private http: HttpClient) {
     this.getMessages();
@@ -33,58 +32,67 @@ export class MessageService {
     return maxId;
   }
 
-  storeMessages() {
-    const msgString = JSON.stringify(this.messages);
-    const header = new HttpHeaders;
+  // storeMessages() {
+  //   const msgString = JSON.stringify(this.messages);
+  //   const header = new HttpHeaders;
 
-    header.set('Content-Type', 'application/json');
-    this.http
-      .put(
-        this.url, msgString
-      )
-      .subscribe(
-        () => {
-          this.messageChangedEvent.next(this.messages.slice());
-        }
-      );
-  }
+  //   header.set('Content-Type', 'application/json');
+  //   this.http
+  //     .put(
+  //       this.url, msgString
+  //     )
+  //     .subscribe(
+  //       () => {
+  //         this.messageChangedEvent.next(this.messages.slice());
+  //       }
+  //     );
+  // }
 
   getMessages() {
-    this.http
-      .get<Message[]>(
-        this.url)
+    this.http.get<{ messageS: string, message: Message[] }>(this.url)
       .subscribe(
-        (messages: Message[]) => {
-          this.messages = messages;
-          this.maxMessageId = this.getMaxId();
-          messages.sort();
-          this.messageChangedEvent.next(this.messages.slice());
+        (responseData: any) => {
+          this.messages = responseData.messages;
         },
         (error: any) => {
           console.log(error);
         }
       );
-    return this.messages;
   }
 
-  getMessage(id: string): Message {
-    for(let message of this.messages) {
-      if(message.id = id) {
-        return message;
-      }
-    }
-    return null;
+  getMessage(id: string) {
+    return this.http.get<{ messageS: string, message: Message }>(this.url + id);
+    // if (!this.messages) {
+    //   return null;
+    // }
+
+    // for (let message of this.messages) {
+    //   if (message.id === id) {
+    //     return message;
+    //   }
+    // }
+
+    // return null;
   }
 
-  addMessage(message: Message) {
-    if(!message) {
+  addMessage(newMessage: Message) {
+    if(!newMessage) {
       return;
     }
 
-    this.maxMessageId++;
-    message.id = this.maxMessageId.toString();
+    newMessage.id = '';
 
-    this.messages.push(message);
-    this.storeMessages();
+    const headers = new HttpHeaders({'Content-Type':'application/json'});
+
+    this.http.post<{ messageString: string, message: Message }>(this.url,
+      newMessage,
+      { headers: headers})
+        .subscribe(
+          (responseData) => {
+            this.messages.push(responseData.message);
+          }
+        );
+    // this.storeMessages();
   }
+
 }

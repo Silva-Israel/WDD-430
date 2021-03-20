@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 import { Document } from '../document.model';
 import { DocumentService } from '../document.service';
@@ -15,26 +16,24 @@ export class DocumentEditComponent implements OnInit {
   document: Document;
   editMode: boolean = false;
   documentForm: FormGroup;
-  id: string;
 
   constructor(
     private documentService: DocumentService,
     private router: Router,
     private route: ActivatedRoute
-    ) {
-
-    }
+    ) { }
 
   ngOnInit() {
      this.route.params
       .subscribe(
         (params: Params) => {
-          this.id = params.id;
-          if(!params.id) {
+          const id = params['id'];
+          if(!id) {
             this.editMode = false;
             return;
           }
-          this.originalDocument = this.documentService.getDocument(this.id);
+
+          this.originalDocument = this.documentService.getDocument(id);
 
           if(!this.originalDocument) {
             return;

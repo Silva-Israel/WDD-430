@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { WindRefService } from 'src/app/wind-ref.service';
 
 import { Document } from '../document.model';

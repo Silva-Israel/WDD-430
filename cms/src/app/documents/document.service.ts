@@ -13,7 +13,7 @@ export class DocumentService {
   documentListChangedEvent = new Subject<Document[]>();
   documents: Document[] = [];
   maxDocumentId: number;
-  url: string = 'https://israelsilva-cms.firebaseio.com/documents.json';
+  url: string = 'http://localhost:3000/documents/';
 
   constructor(private http: HttpClient) {
     this.getDocuments();
@@ -34,57 +34,70 @@ export class DocumentService {
     return maxId;
   }
 
-  storeDocuments() {
-    const docString = JSON.stringify(this.documents);
-    const header = new HttpHeaders;
+  // storeDocuments() {
+  //   const docString = JSON.stringify(this.documents);
+  //   const header = new HttpHeaders;
 
-    header.set('Content-Type', 'application/json');
-    this.http
-      .put(
-        this.url, docString
-      )
-      .subscribe(
-        () => {
-          this.documentListChangedEvent.next(this.documents.slice());
-        }
-      );
-  }
+  //   header.set('Content-Type', 'application/json');
+  //   this.http
+  //     .put(
+  //       this.url, docString
+  //     )
+  //     .subscribe(
+  //       () => {
+  //         this.documentListChangedEvent.next(this.documents.slice());
+  //       }
+  //     );
+  // }
 
   getDocuments() {
-    this.http
-      .get<Document[]>(
-        this.url)
+    this.http.get<{ message: string, document: Document[] }>(this.url)
       .subscribe(
         // Success method
-        (documents: Document[]) => {
-          this.documents = documents;
-          this.maxDocumentId = this.getMaxId();
-          documents.sort();
-          this.documentListChangedEvent.next(this.documents.slice());
+        (responseData: any) => {
+          this.documents = responseData.documents;
+          this.sortAndSend();
         },
         // Error method
         (error: any) => {
           console.log(error);
         }
       );
-    return this.documents;
   }
 
-  getDocument(id: String): Document {
-    return this.documents.find((document) => document.id === id);
+  getDocument(id: String) {
+    return this.http.get<{ message: string, document: Document }>(this.url + id);
+    // if (!this.documents) {
+    //   return null;
+    // }
+
+    // for (let document of this.documents) {
+    //   if (document.id === id) {
+    //     return document;
+    //   }
+    // }
+
+    // return null;
   }
 
-  addDocument(newDocument: Document) {
-    if(!newDocument) {
+  addDocument(document: Document) {
+    if(!document) {
       return;
     }
 
-    this.maxDocumentId++;
-    newDocument.id = this.maxDocumentId.toString();
+    document.id = '';
 
-    this.documents.push(newDocument);
+    const headers = new HttpHeaders({'Content-Type':'application/json'});
 
-    this.storeDocuments();
+    this.http.post<{ message: string, document: Document }>(this.url,
+      document,
+      { headers: headers })
+      .subscribe(
+        (responseData) => {
+          this.documents.push(responseData.document);
+          this.sortAndSend();
+        }
+      );
   }
 
   updateDocument(originalDocument: Document, newDocument: Document) {
@@ -92,17 +105,28 @@ export class DocumentService {
       return;
     }
 
-    var pos = this.documents.indexOf(originalDocument);
+    // const pos = this.documents.indexOf(originalDocument);
+    const pos = this.documents.findIndex(doc => doc.id === originalDocument.id);
+
     if(pos < 0) {
       return;
     }
 
     newDocument.id = originalDocument.id;
-    this.documents[pos] = newDocument;
-    var documentsListClone = this.documents.slice();
+    //newDocument._id = originalDocument._id;
 
-    //this.documentListChangedEvent.next(documentsListClone);
-    this.storeDocuments();
+    const headers = new HttpHeaders({'Content-Type':'application/json'});
+
+    this.http.put(this.url + originalDocument.id,
+      newDocument, {headers: headers})
+      .subscribe(
+        (response: Response) => {
+          this.documents[pos] = newDocument;
+          this.sortAndSend();
+        }
+      );
+
+    //this.storeDocuments();
   }
 
   deleteDocument(document: Document) {
@@ -110,15 +134,25 @@ export class DocumentService {
       return;
     }
 
-    var pos = this.documents.indexOf(document);
+    const pos = this.documents.findIndex(doc => doc.id === document.id);
+
     if (pos < 0) {
       return;
     }
 
-    this.documents.splice(pos, 1);
+    this.http.delete(this.url + document.id)
+      .subscribe(
+        (response: Response) => {
+          this.documents.splice(pos, 1);
+          this.sortAndSend();
+        }
+      );
 
-    //var documentsListClone = this.documents.slice();
-    //this.documentListChangedEvent.next(documentsListClone);
-    this.storeDocuments();
+    //this.storeDocuments();
+  }
+
+  sortAndSend() {
+    this.documents.sort((a, b) => a.name > b.name ? 1 : b.name > a.name ? -1 : 0);
+    this.documentListChangedEvent.next(this.documents.slice());
   }
 }

@@ -6,7 +6,7 @@ module.exports = router;
 
 router.get('/', (req, res, next) => {
   Message.find()
-    .populate('group')
+    .populate('sender')
     .then(messages => {
       res.status(200).json({
         message: 'Messages fetched successfully!',

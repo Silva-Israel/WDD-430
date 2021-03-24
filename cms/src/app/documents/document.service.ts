@@ -1,6 +1,6 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Document } from './document.model';
 
@@ -11,9 +11,8 @@ export class DocumentService {
   documentSelectedEvent = new EventEmitter<Document>();
   documentChangedEvent = new EventEmitter<Document[]>();
   documentListChangedEvent = new Subject<Document[]>();
-  documents: Document[] = [];
+  private documents: Document[] = [];
   maxDocumentId: number;
-  url: string = 'http://localhost:3000/documents/';
 
   constructor(private http: HttpClient) {
     this.getDocuments();
@@ -34,27 +33,11 @@ export class DocumentService {
     return maxId;
   }
 
-  // storeDocuments() {
-  //   const docString = JSON.stringify(this.documents);
-  //   const header = new HttpHeaders;
-
-  //   header.set('Content-Type', 'application/json');
-  //   this.http
-  //     .put(
-  //       this.url, docString
-  //     )
-  //     .subscribe(
-  //       () => {
-  //         this.documentListChangedEvent.next(this.documents.slice());
-  //       }
-  //     );
-  // }
-
   getDocuments() {
-    this.http.get<{ message: string, document: Document[] }>(this.url)
+    this.http.get<{ message: string, documents: Document[] }>('http://localhost:3000/documents')
       .subscribe(
         // Success method
-        (responseData: any) => {
+        (responseData) => {
           this.documents = responseData.documents;
           this.sortAndSend();
         },
@@ -66,31 +49,21 @@ export class DocumentService {
   }
 
   getDocument(id: String) {
-    return this.http.get<{ message: string, document: Document }>(this.url + id);
-    // if (!this.documents) {
-    //   return null;
-    // }
-
-    // for (let document of this.documents) {
-    //   if (document.id === id) {
-    //     return document;
-    //   }
-    // }
-
-    // return null;
+    return this.http
+      .get<{ message: string, document: Document }>('http://localhost:3000/documents/' + id);
   }
 
-  addDocument(document: Document) {
-    if(!document) {
+  addDocument(newDocument: Document) {
+    if(!newDocument) {
       return;
     }
 
-    document.id = '';
+    newDocument.id = '';
 
     const headers = new HttpHeaders({'Content-Type':'application/json'});
 
-    this.http.post<{ message: string, document: Document }>(this.url,
-      document,
+    this.http.post<{ message: string, document: Document }>('http://localhost:3000/documents',
+      newDocument,
       { headers: headers })
       .subscribe(
         (responseData) => {
@@ -105,28 +78,26 @@ export class DocumentService {
       return;
     }
 
-    // const pos = this.documents.indexOf(originalDocument);
-    const pos = this.documents.findIndex(doc => doc.id === originalDocument.id);
+    //const pos = this.documents.findIndex(doc => doc.id === originalDocument.id);
+    const pos = this.documents.indexOf(originalDocument);
 
     if(pos < 0) {
       return;
     }
 
     newDocument.id = originalDocument.id;
-    //newDocument._id = originalDocument._id;
+    // newDocument._id = originalDocument._id;
 
     const headers = new HttpHeaders({'Content-Type':'application/json'});
 
-    this.http.put(this.url + originalDocument.id,
+    this.http.put('http://localhost:3000/documents/' + originalDocument.id,
       newDocument, {headers: headers})
       .subscribe(
         (response: Response) => {
           this.documents[pos] = newDocument;
-          this.sortAndSend();
+          //this.sortAndSend();
         }
       );
-
-    //this.storeDocuments();
   }
 
   deleteDocument(document: Document) {
@@ -140,15 +111,13 @@ export class DocumentService {
       return;
     }
 
-    this.http.delete(this.url + document.id)
+    this.http.delete('http://localhost:3000/documents/' + document.id)
       .subscribe(
         (response: Response) => {
           this.documents.splice(pos, 1);
           this.sortAndSend();
         }
       );
-
-    //this.storeDocuments();
   }
 
   sortAndSend() {

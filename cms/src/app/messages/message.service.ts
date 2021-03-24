@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 import { Message } from './message.model';
 
@@ -9,9 +10,7 @@ import { Message } from './message.model';
 export class MessageService {
   messageChangedEvent = new EventEmitter<Message[]>();
   private messages: Message[] = [];
-
   maxMessageId: number;
-  url: string = 'http://localhost:3000/messages/';
 
   constructor(private http: HttpClient) {
     this.getMessages();
@@ -32,27 +31,12 @@ export class MessageService {
     return maxId;
   }
 
-  // storeMessages() {
-  //   const msgString = JSON.stringify(this.messages);
-  //   const header = new HttpHeaders;
-
-  //   header.set('Content-Type', 'application/json');
-  //   this.http
-  //     .put(
-  //       this.url, msgString
-  //     )
-  //     .subscribe(
-  //       () => {
-  //         this.messageChangedEvent.next(this.messages.slice());
-  //       }
-  //     );
-  // }
-
   getMessages() {
-    this.http.get<{ messageS: string, message: Message[] }>(this.url)
+    this.http.get<{ message: string, messages: Message[] }>('http://localhost:3000/messages')
       .subscribe(
-        (responseData: any) => {
+        (responseData) => {
           this.messages = responseData.messages;
+          this.sortAndSend();
         },
         (error: any) => {
           console.log(error);
@@ -61,18 +45,7 @@ export class MessageService {
   }
 
   getMessage(id: string) {
-    return this.http.get<{ messageS: string, message: Message }>(this.url + id);
-    // if (!this.messages) {
-    //   return null;
-    // }
-
-    // for (let message of this.messages) {
-    //   if (message.id === id) {
-    //     return message;
-    //   }
-    // }
-
-    // return null;
+    return this.http.get<{ messageS: string, message: Message }>('http://localhost:3000/messages/' + id);
   }
 
   addMessage(newMessage: Message) {
@@ -82,17 +55,22 @@ export class MessageService {
 
     newMessage.id = '';
 
-    const headers = new HttpHeaders({'Content-Type':'application/json'});
+    const headers = new HttpHeaders({ 'Content-Type':'application/json' });
 
-    this.http.post<{ messageString: string, message: Message }>(this.url,
+    this.http.post<{ messageString: string, message: Message }>('http://localhost:3000/messages',
       newMessage,
       { headers: headers})
         .subscribe(
           (responseData) => {
             this.messages.push(responseData.message);
+            this.sortAndSend();
           }
         );
-    // this.storeMessages();
+  }
+
+  sortAndSend() {
+    this.messages.sort((a, b) => a.id > b.id ? 1 : b.id > a.id ? -1 : 0);
+    this.messageChangedEvent.next(this.messages.slice());
   }
 
 }

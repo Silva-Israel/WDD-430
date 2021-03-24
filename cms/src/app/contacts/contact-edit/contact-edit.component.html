@@ -86,7 +86,7 @@
             dnd-droppable
             [dropZones]="['contactGroup']"
             (onDropSuccess)="addToGroup($event)">
-            <div *ngFor="let contact of groupContacts; let i = index">
+            <div *ngFor="let contact of contact?.group; let i = index">
               <div>
                 <cms-contact-item
                   class="col-sm-11"

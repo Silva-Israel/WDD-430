@@ -16,10 +16,16 @@ export class MessageEditComponent implements OnInit {
 
   constructor(
     private messageService: MessageService,
-    private contactService: ContactService
-    ) { }
+    private contactService: ContactService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.contactService.getContact('101')
+      .subscribe(
+        response => {
+          this.currentSender = response.contact;
+        }
+      )
+  }
 
   onSendMessage() {
     const msgSubj = this.subjectInputRef.nativeElement.value;
@@ -29,8 +35,8 @@ export class MessageEditComponent implements OnInit {
       '',
       msgSubj,
       msgTxt,
-      this.currentSender.name);
-
+      this.currentSender
+    );
     this.messageService.addMessage(newMessage);
     this.onClear();
   }

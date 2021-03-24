@@ -30,7 +30,12 @@ export class DocumentDetailComponent implements OnInit {
       .subscribe(
         (params: Params) => {
           this.id = params.id;
-          this.document = this.docService.getDocument(this.id);
+          this.docService.getDocument(this.id)
+            .subscribe(
+              response => {
+                this.document = response.document;
+              }
+            )
         }
       );
   }

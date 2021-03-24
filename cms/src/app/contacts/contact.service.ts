@@ -1,5 +1,5 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 import { Contact } from './contact.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -12,8 +12,6 @@ export class ContactService {
   contactListChanged = new Subject<Contact[]>();
   contacts: Contact[] = [];
   maxContactId: number;
-  // url: string = 'https://israelsilva-cms.firebaseio.com/contacts.json';
-  url: string = 'http://localhost:3000/contacts/';
 
   constructor(private http: HttpClient) {
     this.getContacts();
@@ -31,18 +29,8 @@ export class ContactService {
     return maxId;
   }
 
-  // storeContacts() {
-  //   const contacts = JSON.stringify(this.contacts);
-  //   const header = new HttpHeaders();
-
-  //   header.set('Content-Type', 'application/json');
-  //   this.http.put(this.url, contacts).subscribe(() => {
-  //     this.contactListChanged.next(this.contacts.slice());
-  //   });
-  // }
-
   getContacts() {
-    this.http.get<{ message: string, contacts: Contact[] }>(this.url)
+    this.http.get<{ message: string, contacts: Contact[] }>('http://localhost:3000/contacts/')
       .subscribe(
         // Success
         (responseData) => {
@@ -57,18 +45,7 @@ export class ContactService {
   }
 
   getContact(id: string) {
-    return this.http.get<{ message: string, contact: Contact }>(this.url + id);
-    // if (!this.contacts) {
-    //   return null;
-    // }
-
-    // for (let contact of this.contacts) {
-    //   if (contact.id === id) {
-    //     return contact;
-    //   }
-    // }
-
-    // return null;
+    return this.http.get<{ message: string, contact: Contact }>('http://localhost:3000/contacts/' + id);
   }
 
   addContact(newContact: Contact) {
@@ -80,7 +57,7 @@ export class ContactService {
 
     const headers = new HttpHeaders({'Content-Type':'application/json'});
 
-    this.http.post<{ message: string, contact: Contact }>(this.url,
+    this.http.post<{ message: string, contact: Contact }>('http://localhost:3000/contacts',
       newContact,
       { headers: headers })
         .subscribe(
@@ -89,8 +66,6 @@ export class ContactService {
             this.sortAndSend();
           }
         );
-
-    // this.storeContacts();
   }
 
   updateContact(originalContact: Contact, newContact: Contact) {
@@ -105,9 +80,10 @@ export class ContactService {
     }
 
     newContact.id = originalContact.id;
+
     const headers = new HttpHeaders({'Content-Type':'application/json'});
 
-    this.http.put(this.url + originalContact.id,
+    this.http.put('http://localhost:3000/contacts/' + originalContact.id,
       newContact, { headers: headers})
         .subscribe(
           (response: Response) => {
@@ -115,8 +91,6 @@ export class ContactService {
             this.sortAndSend();
           }
         )
-
-    // this.storeContacts();
   }
 
   deleteContact(contact: Contact) {
@@ -130,15 +104,13 @@ export class ContactService {
       return;
     }
 
-    this.http.delete(this.url + contact.id)
+    this.http.delete('http://localhost:3000/contacts/' + contact.id)
       .subscribe(
         (response: Response) => {
           this.contacts.splice(pos, 1);
           this.sortAndSend();
         }
       );
-
-    // this.storeContacts();
   }
 
   sortAndSend() {

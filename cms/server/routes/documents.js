@@ -21,6 +21,25 @@ router.get('/', (req, res, next) => {
     });
 });
 
+router.get('/:id', (req, res, next) => {
+  Document.findOne({
+    "id": req.params.id
+  })
+    .populate('group')
+    .then(document => {
+      res.status(200).json({
+        message: 'Documents fetched successfully!',
+        document: document
+      });
+    })
+    .catch(error => {
+      res.status(500).json({
+        message: 'An error occurred.',
+        error: error
+      });
+    });
+});
+
 router.post('/', (req, res, next) => {
   const maxDocumentId = sequenceGenerator.nextId("documents");
 

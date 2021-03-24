@@ -19,11 +19,8 @@ var app = express(); // create an instance of express
 
 // Tell express to use the following parsers for POST data
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: false
-}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-
 app.use(logger('dev')); // Tell express to use the Morgan logger
 
 // Add support for CORS

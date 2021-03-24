@@ -23,8 +23,9 @@ export class ContactEditComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
-  ngOnInit(): void {
-    this.route.params.subscribe(
+  ngOnInit() {
+    this.route.params
+    .subscribe(
       (params: Params) => {
         this.id = params.id;
         if (!params.id) {
@@ -32,7 +33,12 @@ export class ContactEditComponent implements OnInit {
           return;
         }
 
-        this.originalContact = this.contactService.getContact(this.id);
+        this.contactService.getContact(this.id)
+          .subscribe(
+            response => {
+              this.contact = response.contact;
+            }
+          )
 
         if (!this.originalContact) {
           return;
@@ -45,12 +51,14 @@ export class ContactEditComponent implements OnInit {
           this.groupContacts = this.contact.group.slice();
         }
     });
+    console.log(this.editMode);
   }
 
   onSubmit(form: NgForm) {
     const value = form.value;
     const newContact = new Contact(
       value.id,
+      null,
       value.name,
       value.email,
       value.phone,

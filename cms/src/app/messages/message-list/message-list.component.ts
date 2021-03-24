@@ -10,8 +10,8 @@ import { MessageService } from '../message.service';
   styleUrls: ['./message-list.component.css'],
 })
 export class MessageListComponent implements OnInit, OnDestroy {
-  subscription: Subscription;
   messages: Message[] = [];
+  subscription: Subscription;
 
   constructor(private messageService: MessageService) {}
 

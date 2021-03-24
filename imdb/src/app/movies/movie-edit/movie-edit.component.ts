@@ -6,7 +6,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { StarRatingComponent } from 'ng-starrating';
 
 import { MovieService } from '../movie.service';
 
@@ -19,7 +18,6 @@ export class MovieEditComponent implements OnInit {
   editMode: boolean = false;
   id: number;
   movieForm: FormGroup;
-  totalstar: number = 10;
 
   constructor(
     private movieService: MovieService,
@@ -103,11 +101,19 @@ export class MovieEditComponent implements OnInit {
   }
 
 
-  onRate($event:{oldValue: number, newValue: number, starRating: StarRatingComponent}) {
-    alert(`Old Value:${$event.oldValue},
-      New Value: ${$event.newValue},
-      Checked Color: ${$event.starRating.checkedcolor},
-      Unchecked Color: ${$event.starRating.uncheckedcolor}`);
+  onRate() {
+    let rating = document.querySelector('input[name="rating"]:checked').value;
+    if(rating === '1') {
+      this.movieForm.patchValue({rating: "*"});
+    } else if(rating === '2') {
+      this.movieForm.patchValue({rating: "**"});
+    } else if(rating === '3') {
+      this.movieForm.patchValue({rating: "***"});
+    } else if(rating === '4') {
+      this.movieForm.patchValue({rating: "****"});
+    } else if(rating === '5') {
+      this.movieForm.patchValue({rating: "*****"});
+    }
   }
 
 }

@@ -10,3 +10,11 @@ li {
   color: #337AB7;
   text-decoration: none;
 }
+
+.rat {
+  display: flex;
+}
+
+#star-rating {
+  margin-left: 10px;
+}

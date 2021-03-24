@@ -28,16 +28,10 @@
                   <a class="link" target="_blank" href="{{ url }}{{ actor?.name }}">{{ actor?.name }}</a>
                 </li>
               </ul>
-              <p><strong>Rating: </strong>
-                <star-rating
-                  value="{{ movie?.rating }}"
-                  totalstars="{{ totalstar }}"
-                  checkedcolor="gold"
-                  uncheckedcolor="black"
-                  size="20px"
-                  readonly="false">
-                </star-rating>
-              </p>
+              <div class="rat">
+                <p class=""><strong>Rating: </strong></p>
+                <p id="star-rating" class="">{{ movie?.rating }}</p>
+              </div>
             </div>
           </div>
         </div>

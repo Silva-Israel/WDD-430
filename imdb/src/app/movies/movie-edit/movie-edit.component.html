@@ -1,9 +1,6 @@
 <div class="panel panel-default">
   <div class="panel-body">
-    <form
-      [formGroup]="movieForm"
-      (ngSubmit)="onSubmit()">
-
+    <form [formGroup]="movieForm" (ngSubmit)="onSubmit()">
       <div class="row">
         <div class="col-sm-12 form-group">
           <label for="title">Title:</label>
@@ -13,7 +10,8 @@
             class="form-control required"
             size="120"
             max="120"
-            formControlName="title">
+            formControlName="title"
+          />
         </div>
       </div>
 
@@ -27,13 +25,18 @@
             size="150"
             max="255"
             formControlName="imageUrl"
-            #imageUrl/>
+            #imageUrl
+          />
         </div>
       </div>
 
       <div class="row">
         <div class="col-xs-12">
-          <img [src]="imageUrl.value" class="image-responsive" style="max-height: 300px;" />
+          <img
+            [src]="imageUrl.value"
+            class="image-responsive"
+            style="max-height: 300px"
+          />
         </div>
       </div>
 
@@ -61,7 +64,8 @@
             class="form-control invalid"
             size="150"
             max="255"
-            formControlName="director"/>
+            formControlName="director"
+          />
         </div>
       </div>
 
@@ -71,19 +75,24 @@
           <div
             class="row"
             *ngFor="let movieControl of controls; let i = index"
-            [formGroupName]="i">
+            [formGroupName]="i"
+          >
             <div class="col-xs-10">
               <input
                 id="add-input"
                 type="text"
                 class="form-control"
-                formControlName="name"/>
+                formControlName="name"
+              />
             </div>
             <div class="col-xs-2">
               <button
                 type="button"
                 class="btn btn-danger"
-                (click)="onDeleteActor(i)">X</button>
+                (click)="onDeleteActor(i)"
+              >
+                X
+              </button>
             </div>
           </div>
           <div class="row">
@@ -92,24 +101,72 @@
                 id="add-btn"
                 type="button"
                 class="btn btn-success"
-                (click)="onAddActor()">Add Actor</button>
+                (click)="onAddActor()"
+              >
+                Add Actor
+              </button>
             </div>
           </div>
         </div>
       </div>
 
       <div id="rating-div" class="row">
-        <div class="col-sm-12 form-group">
+        <form class="col-sm-12 form-group">
           <label for="rating">Rating:</label>
-          <star-rating
-            value="1"
-            totalstars="{{ totalstar }}"
-            checkedcolor="gold"
-            uncheckedcolor="black"
-            size="24px"
-            readonly="false">
-          </star-rating>
-        </div>
+          <div id="radio-buttons">
+            <label class="radio-label"
+              >1
+              <input
+                type="radio"
+                name="rating"
+                value="1"
+                checked
+                id="radio1"
+                class="rating-input"
+              />
+            </label>
+            <label class="radio-label"
+              >2
+              <input
+                type="radio"
+                name="rating"
+                value="2"
+                id="radio2"
+                class="rating-input"
+              />
+            </label>
+            <label class="radio-label"
+              >3
+              <input
+                type="radio"
+                name="rating"
+                value="3"
+                id="radio3"
+                class="rating-input"
+              />
+            </label>
+            <label class="radio-label"
+              >4
+              <input
+                type="radio"
+                name="rating"
+                value="4"
+                id="radio4"
+                class="rating-input"
+              />
+            </label>
+            <label class="radio-label"
+              >5
+              <input
+                type="radio"
+                name="rating"
+                value="5"
+                id="radio5"
+                class="rating-input"
+              />
+            </label>
+          </div>
+        </form>
       </div>
 
       <div class="row">
@@ -117,7 +174,8 @@
           <button
             class="btn btn-success"
             type="submit"
-            [disabled]="movieForm.invalid">Save</button>
+            [disabled]="movieForm.invalid"
+            (click)="onRate()">Save</button>
           <button
             class="btn btn-primary"
             type="button"

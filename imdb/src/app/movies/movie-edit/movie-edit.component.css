@@ -7,6 +7,14 @@ textarea.ng-invalid.ng-touched {
   margin-top: 15px;
 }
 
+.rating-input {
+  margin-left: 5px;
+}
+
+.radio-label {
+  margin-left: 10px;
+}
+
 #add-btn {
   margin-top: 10px;
 }

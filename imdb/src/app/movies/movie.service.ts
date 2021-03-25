@@ -48,10 +48,6 @@ export class MovieService {
     this.movieListChanged.next(this.movies.slice());
   }
 
-  // getMovies(): Movie[] {
-  //   return this.movies.slice();
-  // }
-
   getMovies() {
     this.http.get<{ message: string, movies: Movie[] }>('http://localhost:3000/movies')
       .subscribe(

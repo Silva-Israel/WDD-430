@@ -30,7 +30,7 @@ export class ContactService {
   }
 
   getContacts() {
-    this.http.get<{ message: string, contacts: Contact[] }>('http://localhost:3000/contacts/')
+    this.http.get<{ message: string, contacts: Contact[] }>('http://localhost:3000/contacts')
       .subscribe(
         // Success
         (responseData) => {

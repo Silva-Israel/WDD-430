@@ -33,32 +33,25 @@ export class ContactEditComponent implements OnInit {
           return;
         }
 
-        console.log(this.id);
-
         this.contactService.getContact(this.id)
           .subscribe(
             response => {
-              this.contact = response.contact;
+              this.originalContact = response.contact;
 
-              console.log(response.contact);
-              console.log(this.contact);
-            }
-          )
+              if (!this.originalContact) {
+                return;
+              }
 
-        if (!this.originalContact) {
-          //this.editMode = true;
-          return;
-        }
+              this.editMode = true;
 
-        this.editMode = true;
+              this.contact = JSON.parse(JSON.stringify(this.originalContact));
 
-        this.contact = JSON.parse(JSON.stringify(this.originalContact));
-
-        if (this.contact.group) {
-          this.groupContacts = this.contact.group.slice();
-        }
-    });
-    console.log(this.editMode);
+              if (this.contact.group) {
+                this.groupContacts = this.contact.group.slice();
+              }
+            });
+      }
+    );
   }
 
   onSubmit(form: NgForm) {

@@ -37,24 +37,18 @@ export class DocumentEditComponent implements OnInit {
             .subscribe(
               response => {
                 this.originalDocument = response.document;
-                //this.document = response.document;
 
-                console.log(response.document);
-                //console.log(this.document);
-                console.log(this.originalDocument);
+                if(!this.originalDocument) {
+                  return;
+                }
+
+                this.editMode = true;
+
+                this.document = JSON.parse(JSON.stringify(this.originalDocument));
               }
-            )
-
-          if(!this.originalDocument) {
-            return;
-          }
-
-          this.editMode = true;
-
-          this.document = JSON.parse(JSON.stringify(this.originalDocument));
+            );
         }
       );
-      console.log(this.editMode);
   }
 
   onSubmit(form: NgForm) {
@@ -72,10 +66,11 @@ export class DocumentEditComponent implements OnInit {
     } else {
       this.documentService.addDocument(newDocument);
     }
-    this.router.navigate(['/documents', newDocument.id], { relativeTo: this.route });
+    this.router.navigate(['/documents', newDocument.id], {
+      relativeTo: this.route });
   }
 
   onCancel() {
-    this.router.navigate(['/documents'], { relativeTo: this.route });
+    this.router.navigate(['/documents']);
   }
 }

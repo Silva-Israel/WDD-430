@@ -1,0 +1,29 @@
+[
+  {
+    "title": "Inception",
+    "description": "A movie about dreams inside dreams.",
+    "imageUrl": "https://resizing.flixster.com/4MrL62heb7yBgBt8zllSeqNZxg4=/206x305/v2/https://flxt.tmsimg.com/assets/p7825626_p_v10_af.jpg",
+    "rating": "***",
+    "cast": [
+      { "name": "Leonardo DiCaprio" },
+      { "name": "Joseph Gordon-Levitt" }
+    ],
+    "director": "Christopher Nolan"
+  },
+  {
+    "title": "The Lord of the Rings",
+    "description": "The first in this incredible trilogy.",
+    "imageUrl": "https://m.media-amazon.com/images/M/MV5BN2EyZjM3NzUtNWUzMi00MTgxLWI0NTctMzY4M2VlOTdjZWRiXkEyXkFqcGdeQXVyNDUzOTQ5MjY@._V1_.jpg",
+    "rating": "*****",
+    "cast": [{ "name": "Elijah Wood" }, { "name": "Ian McKellen" }],
+    "director": "Peter Jackson"
+  },
+  {
+    "title": "Back to the Future",
+    "description": "what would happen if you went back in time and met your parents in high school?",
+    "imageUrl": "https://img01.mgo-images.com/image/thumbnail/v2/content/1MV7df2fa6b9701b20d36d8079aaf32e950.jpeg",
+    "rating": "****",
+    "cast": [{ "name": "Michael J. Fox" }, { "name": "Christopher Lloyd" }],
+    "director": "Robert Zemeckis"
+  }
+]

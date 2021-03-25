@@ -14,8 +14,7 @@ import { DocumentService } from '../document.service';
 export class DocumentEditComponent implements OnInit {
   originalDocument: Document;
   document: Document;
-  editMode: boolean = false;
-  documentForm: FormGroup;
+  editMode = false;
   id: string;
 
   constructor(
@@ -29,18 +28,19 @@ export class DocumentEditComponent implements OnInit {
       .subscribe(
         (params: Params) => {
           this.id = params.id;
-          if(!params.id) {
+          if(!this.id) {
             this.editMode = false;
             return;
           }
 
-          //this.originalDocument = this.documentService.getDocument(this.id);
           this.documentService.getDocument(this.id)
             .subscribe(
               response => {
                 this.originalDocument = response.document;
                 //this.document = response.document;
+
                 console.log(response.document);
+                //console.log(this.document);
                 console.log(this.originalDocument);
               }
             )
@@ -59,9 +59,15 @@ export class DocumentEditComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     const value = form.value;
-    const newDocument = new Document(value.id, null, value.title, value.description, value.url, value.children);
+    const newDocument = new Document(
+      value.id,
+      '',
+      value.title,
+      value.description,
+      value.url,
+      value.children);
 
-    if(this.editMode === true) {
+    if(this.editMode) {
       this.documentService.updateDocument(this.originalDocument, newDocument);
     } else {
       this.documentService.addDocument(newDocument);

@@ -16,5 +16,7 @@ li {
 }
 
 #star-rating {
+  font-size: 1.2em;
   margin-left: 10px;
+  color: goldenrod;
 }

@@ -8,8 +8,8 @@
             type="text"
             id="title"
             class="form-control required"
-            size="120"
-            max="120"
+            size="100"
+            max="100"
             formControlName="title"
           />
         </div>
@@ -23,7 +23,7 @@
             id="imageUrl"
             class="form-control"
             size="150"
-            max="255"
+            max="150"
             formControlName="imageUrl"
             #imageUrl
           />
@@ -50,7 +50,7 @@
             size="120"
             max="255"
             formControlName="description"
-            rows="6"
+            rows="4"
           ></textarea>
         </div>
       </div>
@@ -111,7 +111,7 @@
       </div>
 
       <div id="rating-div" class="row">
-        <form class="col-sm-12 form-group">
+        <div class="col-sm-12 form-group">
           <label for="rating">Rating:</label>
           <div id="radio-buttons">
             <label class="radio-label"
@@ -123,6 +123,7 @@
                 checked
                 id="radio1"
                 class="rating-input"
+                formControlName="rating"
               />
             </label>
             <label class="radio-label"
@@ -133,6 +134,7 @@
                 value="2"
                 id="radio2"
                 class="rating-input"
+                formControlName="rating"
               />
             </label>
             <label class="radio-label"
@@ -143,6 +145,7 @@
                 value="3"
                 id="radio3"
                 class="rating-input"
+                formControlName="rating"
               />
             </label>
             <label class="radio-label"
@@ -153,6 +156,7 @@
                 value="4"
                 id="radio4"
                 class="rating-input"
+                formControlName="rating"
               />
             </label>
             <label class="radio-label"
@@ -163,10 +167,11 @@
                 value="5"
                 id="radio5"
                 class="rating-input"
+                formControlName="rating"
               />
             </label>
           </div>
-        </form>
+        </div>
       </div>
 
       <div class="row">

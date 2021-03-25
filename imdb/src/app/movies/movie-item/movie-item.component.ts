@@ -12,9 +12,9 @@ export class MovieItemComponent implements OnInit {
   @Input() movie: Movie;
   @Input() index: number;
 
-  constructor() {}
+  constructor(private movieService: MovieService) {}
 
   ngOnInit(): void {
-
+    this.movieService.movieSelectedEvent.emit(this.movie);
   }
 }

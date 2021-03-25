@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { RatingModule } from 'ng-starrating';
 
 import { Movie } from '../movie.model';
 import { MovieService } from '../movie.service';
@@ -12,9 +11,8 @@ import { MovieService } from '../movie.service';
 })
 export class MovieDetailComponent implements OnInit {
   movie: Movie;
-  id: number;
+  id: string;
   url: string;
-  totalstar: number = 10;
 
   constructor(
     private movieService: MovieService,
@@ -22,12 +20,18 @@ export class MovieDetailComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.route.params
       .subscribe(
         (params: Params) => {
-        this.id = +params['id'];
-        this.movie = this.movieService.getMovie(this.id);
+          this.id = params.id;
+          this.movieService.getMovie(this.id)
+            .subscribe(
+              response => {
+                this.movie = response.movie;
+              }
+            )
+        this.onRate(this.id);
         }
       );
 
@@ -39,11 +43,27 @@ export class MovieDetailComponent implements OnInit {
   }
 
   onDelete() {
-    this.movieService.deleteMovie(this.id);
+    //this.movieService.deleteMovie(this.id);
     this.router.navigateByUrl('movies');
   }
 
-  onRate() {
-
+  onRate(id: string) {
+    switch(this.movie.rating) {
+      case '*':
+        document.getElementById('star-rating').innerHTML = '&#9733;';
+        break;
+      case '**':
+        document.getElementById('star-rating').innerHTML = '&#9733; &#9733;';
+        break;
+      case '***':
+        document.getElementById('star-rating').innerHTML = '&#9733; &#9733; &#9733;';
+        break;
+      case '****':
+        document.getElementById('star-rating').innerHTML = '&#9733; &#9733; &#9733; &#9733;';
+        break;
+      case '*****':
+        document.getElementById('star-rating').innerHTML = '&#9733; &#9733; &#9733; &#9733; &#9733;';
+        break;
+    }
   }
 }

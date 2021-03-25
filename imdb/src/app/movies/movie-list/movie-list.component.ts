@@ -14,15 +14,20 @@ export class MovieListComponent implements OnInit, OnDestroy {
   subscription: Subscription;
 
   constructor(private movieService: MovieService) {
-    this.movies = this.movieService.getMovies();
+
   }
 
   ngOnInit() {
-    this.subscription = this.movieService.movieListChanged.subscribe(
-      (movieList: Movie[]) => {
-        this.movies = movieList;
-      }
-    );
+    this.movieService.getMovies();
+
+    this.subscription = this.movieService.movieListChanged
+      .subscribe(
+        (movieList: Movie[]) => {
+          this.movies = movieList;
+
+          console.log(movieList);
+        }
+      );
   }
 
   ngOnDestroy() {

@@ -12,6 +12,7 @@ import { MovieItemComponent } from './movies/movie-item/movie-item.component';
 import { MovieService } from './movies/movie.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RatingModule } from 'ng-starrating';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { RatingModule } from 'ng-starrating';
     FormsModule,
     RatingModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [MovieService],
   bootstrap: [AppComponent]

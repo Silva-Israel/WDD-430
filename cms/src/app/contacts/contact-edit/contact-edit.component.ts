@@ -28,23 +28,30 @@ export class ContactEditComponent implements OnInit {
     .subscribe(
       (params: Params) => {
         this.id = params.id;
-        if (!params.id) {
+        if (!this.id) {
           this.editMode = false;
           return;
         }
+
+        console.log(this.id);
 
         this.contactService.getContact(this.id)
           .subscribe(
             response => {
               this.contact = response.contact;
+
+              console.log(response.contact);
+              console.log(this.contact);
             }
           )
 
         if (!this.originalContact) {
+          //this.editMode = true;
           return;
         }
 
         this.editMode = true;
+
         this.contact = JSON.parse(JSON.stringify(this.originalContact));
 
         if (this.contact.group) {
@@ -58,7 +65,7 @@ export class ContactEditComponent implements OnInit {
     const value = form.value;
     const newContact = new Contact(
       value.id,
-      null,
+      '',
       value.name,
       value.email,
       value.phone,
@@ -77,7 +84,7 @@ export class ContactEditComponent implements OnInit {
   }
 
   onCancel() {
-    this.router.navigate(['/contacts'], { relativeTo: this.route });
+    this.router.navigate(['/contacts']);
   }
 
   isInvalidContact(newContact: Contact) {

@@ -78,15 +78,15 @@ export class DocumentService {
       return;
     }
 
-    //const pos = this.documents.findIndex(doc => doc.id === originalDocument.id);
-    const pos = this.documents.indexOf(originalDocument);
+    const pos = this.documents.findIndex(doc => doc.id === originalDocument.id);
+    //const pos = this.documents.indexOf(originalDocument);
 
     if(pos < 0) {
       return;
     }
 
+    //const stringDocument = JSON.stringify(newDocument);
     newDocument.id = originalDocument.id;
-    // newDocument._id = originalDocument._id;
 
     const headers = new HttpHeaders({'Content-Type':'application/json'});
 

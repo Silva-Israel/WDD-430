@@ -26,11 +26,12 @@ export class MovieEditComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.params.subscribe((params: Params) => {
-      this.id = +params['id'];
-      this.editMode = params['id'] != null;
-      this.initForm();
-    });
+    this.route.params
+      .subscribe((params: Params) => {
+        this.id = +params['id'];
+        this.editMode = params['id'] != null;
+        //this.initForm();
+      });
   }
 
   get controls() {
@@ -63,6 +64,7 @@ export class MovieEditComponent implements OnInit {
     this.router.navigate(['../'], { relativeTo: this.route });
   }
 
+  /*
   private initForm() {
     let movieTitle = '';
     let movieDescription = '';
@@ -98,22 +100,28 @@ export class MovieEditComponent implements OnInit {
       rating: new FormControl(movieRating),
       cast: movieCast,
     });
-  }
-
+  }*/
 
   onRate() {
+    // @ts-ignore
     let rating = document.querySelector('input[name="rating"]:checked').value;
-    if(rating === '1') {
-      this.movieForm.patchValue({rating: "*"});
-    } else if(rating === '2') {
-      this.movieForm.patchValue({rating: "**"});
-    } else if(rating === '3') {
-      this.movieForm.patchValue({rating: "***"});
-    } else if(rating === '4') {
-      this.movieForm.patchValue({rating: "****"});
-    } else if(rating === '5') {
-      this.movieForm.patchValue({rating: "*****"});
+
+    switch(rating) {
+      case '1':
+        this.movieForm.patchValue({rating: "*"});
+        break;
+      case '2':
+        this.movieForm.patchValue({rating: "**"});
+        break;
+      case '3':
+        this.movieForm.patchValue({rating: "***"});
+        break;
+      case '4':
+        this.movieForm.patchValue({rating: "****"});
+        break;
+      case '5':
+        this.movieForm.patchValue({rating: "*****"});
+        break;
     }
   }
-
 }

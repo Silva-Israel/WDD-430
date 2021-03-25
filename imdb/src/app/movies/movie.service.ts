@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { Movie } from './movie.model';
 
@@ -6,16 +7,20 @@ import { Movie } from './movie.model';
   providedIn: 'root',
 })
 export class MovieService {
+  movieSelectedEvent = new EventEmitter<Movie>();
   movieListChanged = new Subject<Movie[]>();
   private movies: Movie[] = [];
 
-  constructor() {
+  constructor(
+    private http: HttpClient) {
+      this.getMovies();
+/*
     this.movies = [
       new Movie(
         'Inception',
         'A movie about dreams inside dreams.',
         'https://resizing.flixster.com/4MrL62heb7yBgBt8zllSeqNZxg4=/206x305/v2/https://flxt.tmsimg.com/assets/p7825626_p_v10_af.jpg',
-        '5 stars',
+        '*****',
         [{ name: 'Leonardo DiCaprio' }, { name: 'Joseph Gordon-Levitt' }],
         'Christopher Nolan'
       ),
@@ -23,7 +28,7 @@ export class MovieService {
         'The Lord of the Rings',
         'The first in this incredible trilogy.',
         'https://m.media-amazon.com/images/M/MV5BN2EyZjM3NzUtNWUzMi00MTgxLWI0NTctMzY4M2VlOTdjZWRiXkEyXkFqcGdeQXVyNDUzOTQ5MjY@._V1_.jpg',
-        '5 stars',
+        '****',
         [{ name: 'Elijah Wood' }, { name: 'Ian McKellen' }],
         'Peter Jackson'
       ),
@@ -31,11 +36,11 @@ export class MovieService {
         'Back to the Future',
         'What would happen if you went back in time and met your parents in high school?',
         'https://img01.mgo-images.com/image/thumbnail/v2/content/1MV7df2fa6b9701b20d36d8079aaf32e950.jpeg',
-        '5 stars',
+        '**',
         [{ name: 'Michael J. Fox' }, { name: 'Christopher Lloyd' }],
         'Robert Zemeckis'
       ),
-    ];
+    ];*/
   }
 
   setMovies(movies: Movie[]) {
@@ -43,12 +48,25 @@ export class MovieService {
     this.movieListChanged.next(this.movies.slice());
   }
 
-  getMovies(): Movie[] {
-    return this.movies.slice();
+  // getMovies(): Movie[] {
+  //   return this.movies.slice();
+  // }
+
+  getMovies() {
+    this.http.get<{ message: string, movies: Movie[] }>('http://localhost:3000/movies')
+      .subscribe(
+        (response) => {
+          this.movies = response.movies;
+        },
+        (error: any) => {
+          console.log(error);
+        }
+      );
   }
 
-  getMovie(index: number) {
-    return this.movies[index];
+  getMovie(id: string) {
+    //return this.movies[index];
+    return this.http.get<{ message: string, movie: Movie }>('http://localhost:3000/movies/' + id);
   }
 
   addMovie(movie: Movie) {

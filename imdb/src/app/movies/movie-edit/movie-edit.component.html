@@ -3,7 +3,7 @@
     <form (ngSubmit)="onSubmit(f)" #f="ngForm">
 
       <div class="row">
-        <div class="col-sm-12 form-group">
+        <div class="col-xs-12 form-group">
           <label for="title">Title:</label>
           <input
             required
@@ -20,15 +20,13 @@
       </div>
 
       <div class="row">
-        <div class="col-sm-12 form-group">
+        <div class="col-xs-12 form-group">
           <label for="imageUrl">Image URL:</label>
           <input
             type="text"
             id="imageUrl"
             name="imageUrl"
             class="form-control"
-            size="150"
-            max="150"
             [ngModel]="movie?.imageUrl"
             #imageUrl="ngModel"
           />
@@ -46,7 +44,7 @@
       </div>
 
       <div class="row">
-        <div class="col-sm-12 form-group">
+        <div class="col-xs-12 form-group">
           <label for="description">Description:</label>
           <textarea
             type="text"
@@ -63,7 +61,7 @@
       </div>
 
       <div class="row">
-        <div class="col-sm-12 form-group">
+        <div class="col-xs-12 form-group">
           <label for="director">Director:</label>
           <input
             type="text"
@@ -116,7 +114,7 @@
       </div>
 
       <div id="rating-div" class="row">
-        <div class="col-sm-12 form-group">
+        <div class="col-xs-12 form-group">
           <label for="rating">Rating:</label>
             <input
               type="text"

@@ -1,16 +1,20 @@
 <div class="panel panel-default">
   <div class="panel-body">
-    <form [formGroup]="movieForm" (ngSubmit)="onSubmit()">
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+
       <div class="row">
         <div class="col-sm-12 form-group">
           <label for="title">Title:</label>
           <input
+            required
             type="text"
             id="title"
+            name="title"
             class="form-control required"
             size="100"
             max="100"
-            formControlName="title"
+            [ngModel]="movie?.title"
+            #title="ngModel"
           />
         </div>
       </div>
@@ -21,11 +25,12 @@
           <input
             type="text"
             id="imageUrl"
+            name="imageUrl"
             class="form-control"
             size="150"
             max="150"
-            formControlName="imageUrl"
-            #imageUrl
+            [ngModel]="movie?.imageUrl"
+            #imageUrl="ngModel"
           />
         </div>
       </div>
@@ -46,11 +51,13 @@
           <textarea
             type="text"
             id="description"
+            name="description"
             class="form-control required"
             size="120"
             max="255"
-            formControlName="description"
             rows="4"
+            [ngModel]="movie?.description"
+            #description="ngModel"
           ></textarea>
         </div>
       </div>
@@ -61,50 +68,48 @@
           <input
             type="text"
             id="director"
+            name="director"
             class="form-control invalid"
             size="150"
             max="255"
-            formControlName="director"
+            [ngModel]="movie?.director"
+            #director="ngModel"
           />
         </div>
       </div>
 
-      <label for="cast">Cast:</label>
-      <div class="row">
-        <div class="col-xs-12" formArrayName="cast">
-          <div
-            class="row"
-            *ngFor="let movieControl of controls; let i = index"
-            [formGroupName]="i"
-          >
-            <div class="col-xs-10">
-              <input
-                id="add-input"
-                type="text"
-                class="form-control"
-                formControlName="name"
-              />
+      <div>
+        <label for="cast">Cast:</label>
+        <div class="row">
+          <div class="col-xs-12">
+            <div
+              class="row"
+              *ngFor="let actor of groupActors; let i = index">
+              <div class="col-xs-10">
+                <input
+                  id="add-input"
+                  type="text"
+                  name="{{actor.name}}"
+                  class="form-control"
+                  [ngModel]="actor?.name"
+                  #cast="ngModel"
+                />
+              </div>
+              <div class="col-xs-2">
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  (click)="onDeleteActor(i)">X</button>
+              </div>
             </div>
-            <div class="col-xs-2">
-              <button
-                type="button"
-                class="btn btn-danger"
-                (click)="onDeleteActor(i)"
-              >
-                X
-              </button>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-12">
-              <button
-                id="add-btn"
-                type="button"
-                class="btn btn-success"
-                (click)="onAddActor()"
-              >
-                Add Actor
-              </button>
+            <div class="row">
+              <div class="col-xs-12">
+                <button
+                  id="add-btn"
+                  type="button"
+                  class="btn btn-success"
+                  (click)="onAddActor()">Add Actor</button>
+              </div>
             </div>
           </div>
         </div>
@@ -113,64 +118,15 @@
       <div id="rating-div" class="row">
         <div class="col-sm-12 form-group">
           <label for="rating">Rating:</label>
-          <div id="radio-buttons">
-            <label class="radio-label"
-              >1
-              <input
-                type="radio"
-                name="rating"
-                value="1"
-                checked
-                id="radio1"
-                class="rating-input"
-                formControlName="rating"
-              />
-            </label>
-            <label class="radio-label"
-              >2
-              <input
-                type="radio"
-                name="rating"
-                value="2"
-                id="radio2"
-                class="rating-input"
-                formControlName="rating"
-              />
-            </label>
-            <label class="radio-label"
-              >3
-              <input
-                type="radio"
-                name="rating"
-                value="3"
-                id="radio3"
-                class="rating-input"
-                formControlName="rating"
-              />
-            </label>
-            <label class="radio-label"
-              >4
-              <input
-                type="radio"
-                name="rating"
-                value="4"
-                id="radio4"
-                class="rating-input"
-                formControlName="rating"
-              />
-            </label>
-            <label class="radio-label"
-              >5
-              <input
-                type="radio"
-                name="rating"
-                value="5"
-                id="radio5"
-                class="rating-input"
-                formControlName="rating"
-              />
-            </label>
-          </div>
+            <input
+              type="text"
+              id="rating"
+              name="rating"
+              class="form-control"
+              placeholder="Enter 1 to 5 stars"
+              [ngModel]="movie?.rating"
+              #rating="ngModel"
+            />
         </div>
       </div>
 
@@ -179,8 +135,7 @@
           <button
             class="btn btn-success"
             type="submit"
-            [disabled]="movieForm.invalid"
-            (click)="onRate()">Save</button>
+            [disabled]="!f.valid">Save</button>
           <button
             class="btn btn-primary"
             type="button"

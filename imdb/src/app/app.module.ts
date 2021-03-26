@@ -13,6 +13,7 @@ import { MovieService } from './movies/movie.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RatingModule } from 'ng-starrating';
 import { HttpClientModule } from '@angular/common/http';
+import { MoviesFilterPipe } from './movies/movies-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
     MovieListComponent,
     MovieDetailComponent,
     MovieEditComponent,
-    MovieItemComponent
+    MovieItemComponent,
+    MoviesFilterPipe
   ],
   imports: [
     BrowserModule,

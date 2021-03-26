@@ -49,7 +49,8 @@ router.post('/', (req, res, next) => {
     description: req.body.description,
     imageUrl: req.body.imageUrl,
     cast: req.body.cast,
-    director: req.body.director
+    director: req.body.director,
+    rating: req.body.rating
   });
 
   movie.save()
@@ -74,7 +75,8 @@ router.put('/:id', (req, res, next) => {
       movie.description = req.body.description,
       movie.imageUrl = req.body.imageUrl,
       movie.cast = req.body.cast,
-      movie.director = req.body.director
+      movie.director = req.body.director,
+      movie.rating = req.body.rating
 
       Movie.updateOne({ id: req.params.id }, movie)
         .then(result => {

@@ -12,10 +12,9 @@ import { MovieService } from '../movie.service';
 export class MovieListComponent implements OnInit, OnDestroy {
   movies: Movie[];
   subscription: Subscription;
+  term: string;
 
-  constructor(private movieService: MovieService) {
-
-  }
+  constructor(private movieService: MovieService) { }
 
   ngOnInit() {
     this.movieService.getMovies();
@@ -25,9 +24,13 @@ export class MovieListComponent implements OnInit, OnDestroy {
         (movieList: Movie[]) => {
           this.movies = movieList;
 
-          console.log(movieList);
+          this.movies.sort((a, b) => a.title < b.title ? -1 : a.title > b.title ? 1 : 0);
         }
       );
+  }
+
+  search(value: string) {
+    this.term = value;
   }
 
   ngOnDestroy() {

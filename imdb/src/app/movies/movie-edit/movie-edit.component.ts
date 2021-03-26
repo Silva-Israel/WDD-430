@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormArray,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Actor } from 'src/app/shared/actor.model';
 
+import { Movie } from '../movie.model';
 import { MovieService } from '../movie.service';
 
 @Component({
@@ -15,9 +12,11 @@ import { MovieService } from '../movie.service';
   styleUrls: ['./movie-edit.component.css'],
 })
 export class MovieEditComponent implements OnInit {
+  originalMovie: Movie;
+  movie: Movie;
   editMode: boolean = false;
-  id: number;
-  movieForm: FormGroup;
+  id: string;
+  groupActors: Actor[] = [];
 
   constructor(
     private movieService: MovieService,
@@ -27,101 +26,68 @@ export class MovieEditComponent implements OnInit {
 
   ngOnInit() {
     this.route.params
-      .subscribe((params: Params) => {
-        this.id = +params['id'];
-        this.editMode = params['id'] != null;
-        //this.initForm();
+      .subscribe(
+        (params: Params) => {
+          this.id = params.id;
+          if(!this.id) {
+            this.editMode = false;
+            return;
+          }
+
+          this.movieService.getMovie(this.id)
+            .subscribe(
+              response => {
+                this.originalMovie = response.movie;
+
+                if(!this.originalMovie) {
+                  return;
+                }
+
+                this.editMode = true;
+
+                this.movie = JSON.parse(JSON.stringify(this.originalMovie));
+
+                if(this.movie.cast) {
+                  this.groupActors = this.movie.cast.slice();
+                }
+              }
+            );
       });
   }
 
-  get controls() {
-    return (<FormArray>this.movieForm.get('cast')).controls;
-  }
+  onSubmit(form: NgForm) {
+    const value = form.value;
+    const newMovie = new Movie(
+      value.id,
+      '',
+      value.title,
+      value.description,
+      value.imageUrl,
+      value.rating,
+      this.groupActors,
+      value.director
+    );
 
-  onSubmit() {
     if (this.editMode) {
-      this.movieService.updateMovie(this.id, this.movieForm.value);
+      this.movieService.updateMovie(this.originalMovie, newMovie);
     } else {
-      this.movieService.addMovie(this.movieForm.value);
+      this.movieService.addMovie(newMovie);
     }
 
-    this.onCancel();
-  }
-
-  onAddActor() {
-    (<FormArray>this.movieForm.get('cast')).push(
-      new FormGroup({
-        name: new FormControl(null, Validators.required),
-      })
-    );
-  }
-
-  onDeleteActor(index: number) {
-    (<FormArray>this.movieForm.get('cast')).removeAt(index);
+    this.router.navigate(['/movies', newMovie.id], {
+      relativeTo: this.route
+    });
   }
 
   onCancel() {
-    this.router.navigate(['../'], { relativeTo: this.route });
+    this.router.navigate(['/movies']);
   }
 
-  /*
-  private initForm() {
-    let movieTitle = '';
-    let movieDescription = '';
-    let movieImageUrl = '';
-    let movieDirector = '';
-    let movieRating = '';
-    let movieCast = new FormArray([]);
+  onAddActor() {
 
-    if (this.editMode) {
-      const movie = this.movieService.getMovie(this.id);
-      movieTitle = movie.title;
-      movieDescription = movie.description;
-      movieImageUrl = movie.imageUrl;
-      movieDirector = movie.director;
-      movieRating = movie.rating;
+  }
 
-      if (movie['cast']) {
-        for (let actor of movie.cast) {
-          movieCast.push(
-            new FormGroup({
-              name: new FormControl(actor.name),
-            })
-          );
-        }
-      }
-    }
+  onDeleteActor() {
 
-    this.movieForm = new FormGroup({
-      title: new FormControl(movieTitle, Validators.required),
-      description: new FormControl(movieDescription),
-      imageUrl: new FormControl(movieImageUrl),
-      director: new FormControl(movieDirector),
-      rating: new FormControl(movieRating),
-      cast: movieCast,
-    });
-  }*/
-
-  onRate() {
-    // @ts-ignore
-    let rating = document.querySelector('input[name="rating"]:checked').value;
-
-    switch(rating) {
-      case '1':
-        this.movieForm.patchValue({rating: "*"});
-        break;
-      case '2':
-        this.movieForm.patchValue({rating: "**"});
-        break;
-      case '3':
-        this.movieForm.patchValue({rating: "***"});
-        break;
-      case '4':
-        this.movieForm.patchValue({rating: "****"});
-        break;
-      case '5':
-        this.movieForm.patchValue({rating: "*****"});
-        break;
-    }
   }
 }

@@ -8,11 +8,17 @@ import { MovieService } from './movie.service';
   styleUrls: ['./movies.component.css']
 })
 export class MoviesComponent implements OnInit {
+  selectedMovie: Movie;
 
-  constructor() { }
+  constructor(private movieService: MovieService) { }
 
   ngOnInit() {
-
+    this.movieService.movieSelectedEvent
+      .subscribe(
+        (movie: Movie) => {
+          this.selectedMovie = movie;
+        }
+      )
   }
 
 }

@@ -20,13 +20,4 @@ export class ContactsComponent implements OnInit {
         }
       );
   }
-
-  ngAfterViewInit() {
-  //   this.contactService.contactSelectedEvent
-  //     .subscribe(
-  //       (contact: Contact) => {
-  //         this.selectedContact = contact;
-  //       }
-  //     )
-  }
 }

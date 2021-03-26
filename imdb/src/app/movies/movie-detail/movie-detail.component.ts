@@ -29,9 +29,10 @@ export class MovieDetailComponent implements OnInit {
             .subscribe(
               response => {
                 this.movie = response.movie;
+
+                this.onRate(this.id);
               }
             )
-        this.onRate(this.id);
         }
       );
 
@@ -43,12 +44,12 @@ export class MovieDetailComponent implements OnInit {
   }
 
   onDelete() {
-    //this.movieService.deleteMovie(this.id);
+    this.movieService.deleteMovie(this.movie);
     this.router.navigateByUrl('movies');
   }
 
   onRate(id: string) {
-    switch(this.movie.rating) {
+    switch(this.movie?.rating) {
       case '*':
         document.getElementById('star-rating').innerHTML = '&#9733;';
         break;

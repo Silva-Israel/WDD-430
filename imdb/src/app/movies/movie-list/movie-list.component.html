@@ -3,15 +3,27 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="col-md-9">Movies</h4>
-        <button [routerLink]="['new']" class="btn btn-success">New Movie</button>
+        <div class="row">
+          <div class="input-group pull-left pad-left-right col-xs-7">
+            <input
+              type="text"
+              #searchBox
+              (keyup)="search(searchBox.value)"
+              class="form-control"
+              placeholder="Enter a search value">
+            <div class="glyphicon glyphicon-search input-group-addon" (click)="search(searchBox.value)"></div>
+          </div>
+          <div class="pull-right pad-left-right">
+            <button [routerLink]="['new']" class="btn btn-success">New Movie</button>
+          </div>
+        </div>
       </div>
       <div class="panel-body">
         <div class="row">
           <div class="col-xs-12">
             <app-movie-item
-              *ngFor="let movie of movies; let i = index"
+              *ngFor="let movie of movies | moviesFilter:[term]"
               [movie]="movie"
-              [index]="i"
             ></app-movie-item>
           </div>
         </div>

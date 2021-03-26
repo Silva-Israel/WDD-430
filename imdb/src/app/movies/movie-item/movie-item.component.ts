@@ -10,11 +10,11 @@ import { MovieService } from '../movie.service';
 })
 export class MovieItemComponent implements OnInit {
   @Input() movie: Movie;
-  @Input() index: number;
 
   constructor(private movieService: MovieService) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.movieService.movieSelectedEvent.emit(this.movie);
+
   }
 }

@@ -4,7 +4,7 @@
       <div class="panel-heading">
         <h4 class="col-md-9">Movies</h4>
         <div class="row">
-          <div class="input-group pull-left pad-left-right col-xs-7">
+          <div class="input-group pull-left pad-left-right col-xs-9">
             <input
               type="text"
               #searchBox
@@ -13,7 +13,7 @@
               placeholder="Enter a search value">
             <div class="glyphicon glyphicon-search input-group-addon" (click)="search(searchBox.value)"></div>
           </div>
-          <div class="pull-right pad-left-right">
+          <div class="pull-right pad-left-right col-xs-3">
             <button [routerLink]="['new']" class="btn btn-success">New Movie</button>
           </div>
         </div>

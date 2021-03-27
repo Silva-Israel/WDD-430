@@ -29,6 +29,7 @@ img {
 
 #cast-block {
   margin-left: 15px;
+  margin-bottom: 5px;
 }
 
 .link {
@@ -38,4 +39,16 @@ img {
 
 .actor {
   margin-top: 10px;
+}
+
+.button {
+  cursor: pointer;
+}
+
+#buttonRed:hover {
+  color: red;
+}
+
+#buttonGreen {
+  margin-left: -10px;
 }

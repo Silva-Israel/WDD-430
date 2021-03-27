@@ -78,14 +78,19 @@
 
       <div id="cast-container">
         <label for="cast">Cast:</label>
-        <div class="row">
+        <div
+          class="row"
+          *ngFor="let actor of groupActors; let i = index">
           <div
-            class="col-xs-12"
-            *ngFor="let actor of groupActors">
+            class="col-xs-10">
             <div id="cast-block">
               <a class="link" target="_blank" href="{{ url }}{{ actor }}">{{ actor }}</a>
             </div>
           </div>
+          <div
+            id="buttonRed"
+            class="col-xs-2 button"
+            (click)="onDeleteActor(i)">X</div>
         </div>
         <div class="row">
           <div class="col-xs-10">
@@ -96,10 +101,11 @@
               placeholder="Enter actor">
           </div>
           <div class="col-xs-2">
-            <button
+            <div
+              id="buttonGreen"
               type="button"
               class="btn btn-success actor"
-              (click)="onAddActor()">Add</button>
+              (click)="onAddActor()">Add</div>
           </div>
         </div>
       </div>

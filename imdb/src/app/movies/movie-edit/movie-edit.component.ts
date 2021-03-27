@@ -95,7 +95,12 @@ export class MovieEditComponent implements OnInit {
     console.log(this.groupActors);
   }
 
-  onDeleteActor() {
+  onDeleteActor(index: number) {
+    if(index < 0 || index >= this.groupActors.length) {
+      return;
+    }
+
+    this.groupActors.splice(index, 1);
 
   }
 }

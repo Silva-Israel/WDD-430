@@ -21,9 +21,10 @@
             <div class="pull-left">
               <p><strong>Description: </strong>{{ movie?.description }}</p>
               <p><strong>Director: </strong><a class="link" target="_blank" href="{{ url }}{{ movie?.director }}">{{ movie?.director }}</a></p>
-              <strong *ngIf="movie?.cast">Cast: </strong>
+              <strong>Cast: </strong>
               <ul>
                 <li
+                  id="cast"
                   *ngFor="let actor of movie?.cast">
                   <a class="link" target="_blank" href="{{ url }}{{ actor }}">{{ actor }}</a>
                 </li>

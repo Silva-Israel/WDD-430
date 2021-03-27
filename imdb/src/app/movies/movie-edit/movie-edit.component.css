@@ -26,3 +26,16 @@ textarea.ng-invalid.ng-touched {
 img {
   max-width: 150px;
 }
+
+#cast-block {
+  margin-left: 15px;
+}
+
+.link {
+  color: #337AB7;
+  text-decoration: none;
+}
+
+.actor {
+  margin-top: 10px;
+}

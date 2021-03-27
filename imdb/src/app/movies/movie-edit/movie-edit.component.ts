@@ -16,7 +16,8 @@ export class MovieEditComponent implements OnInit {
   movie: Movie;
   editMode: boolean = false;
   id: string;
-  groupActors: Actor[] = [];
+  groupActors: string[] = [];
+  url: string;
 
   constructor(
     private movieService: MovieService,
@@ -53,6 +54,8 @@ export class MovieEditComponent implements OnInit {
               }
             );
       });
+
+      this.url = 'https://www.imdb.com/find?q=';
   }
 
   onSubmit(form: NgForm) {
@@ -84,10 +87,16 @@ export class MovieEditComponent implements OnInit {
   }
 
   onAddActor() {
+    // @ts-ignore
+    let newActor = document.querySelector('#actor-entered').value;
 
+    this.groupActors.push(newActor);
+
+    console.log(this.groupActors);
   }
 
   onDeleteActor() {
 
   }
 }
+

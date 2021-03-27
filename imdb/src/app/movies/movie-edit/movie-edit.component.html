@@ -76,7 +76,35 @@
         </div>
       </div>
 
-      <div>
+      <div id="cast-container">
+        <label for="cast">Cast:</label>
+        <div class="row">
+          <div
+            class="col-xs-12"
+            *ngFor="let actor of groupActors">
+            <div id="cast-block">
+              <a class="link" target="_blank" href="{{ url }}{{ actor }}">{{ actor }}</a>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-10">
+            <input
+            id="actor-entered"
+              type="text"
+              class="form-control actor"
+              placeholder="Enter actor">
+          </div>
+          <div class="col-xs-2">
+            <button
+              type="button"
+              class="btn btn-success actor"
+              (click)="onAddActor()">Add</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div>
         <label for="cast">Cast:</label>
         <div class="row">
           <div class="col-xs-12">
@@ -111,7 +139,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <div id="rating-div" class="row">
         <div class="col-xs-12 form-group">

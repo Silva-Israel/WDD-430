@@ -8,7 +8,8 @@ export class Movie {
     public description: string,
     public imageUrl: string,
     public rating: string,
-    public cast: Actor[],
+    public cast: string[],
+    //public cast: Actor[],
     public director: string
   ) {}
 }

@@ -10,7 +10,7 @@ import { MovieService } from '../movie.service';
   styleUrls: ['./movie-list.component.css']
 })
 export class MovieListComponent implements OnInit, OnDestroy {
-  movies: Movie[];
+  movies: Movie[] = [];
   subscription: Subscription;
   term: string;
 
@@ -24,7 +24,7 @@ export class MovieListComponent implements OnInit, OnDestroy {
         (movieList: Movie[]) => {
           this.movies = movieList;
 
-          this.movies.sort((a, b) => a.title < b.title ? -1 : a.title > b.title ? 1 : 0);
+          //this.movies.sort((a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0);
         }
       );
   }

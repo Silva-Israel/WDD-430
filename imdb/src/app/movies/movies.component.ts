@@ -18,7 +18,7 @@ export class MoviesComponent implements OnInit {
         (movie: Movie) => {
           this.selectedMovie = movie;
         }
-      )
+      );
   }
 
 }

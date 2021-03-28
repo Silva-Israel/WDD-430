@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Actor } from 'src/app/shared/actor.model';
 
 import { Movie } from '../movie.model';
 import { MovieService } from '../movie.service';
@@ -88,11 +87,13 @@ export class MovieEditComponent implements OnInit {
 
   onAddActor() {
     // @ts-ignore
-    let newActor = document.querySelector('#actor-entered').value;
+    let newActor = document.getElementById('actor-entered').value;
 
-    this.groupActors.push(newActor);
+    if(newActor) {
+      this.groupActors.push(newActor);
+    }
 
-    console.log(this.groupActors);
+    newActor = '';
   }
 
   onDeleteActor(index: number) {
@@ -101,7 +102,6 @@ export class MovieEditComponent implements OnInit {
     }
 
     this.groupActors.splice(index, 1);
-
   }
 }
 

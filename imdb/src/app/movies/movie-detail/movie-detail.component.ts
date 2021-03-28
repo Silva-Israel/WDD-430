@@ -46,6 +46,8 @@ export class MovieDetailComponent implements OnInit {
   onDelete() {
     this.movieService.deleteMovie(this.movie);
     this.router.navigateByUrl('movies');
+
+    this.movieService.getMovies();
   }
 
   onRate(id: string) {

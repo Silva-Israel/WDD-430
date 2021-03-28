@@ -1,5 +1,3 @@
-import { Actor } from '../shared/actor.model';
-
 export class Movie {
   constructor(
     public id: string,
@@ -9,7 +7,6 @@ export class Movie {
     public imageUrl: string,
     public rating: string,
     public cast: string[],
-    //public cast: Actor[],
     public director: string
   ) {}
 }

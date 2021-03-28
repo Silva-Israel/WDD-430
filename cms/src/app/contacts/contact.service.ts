@@ -1,8 +1,8 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Subject } from 'rxjs';
 
 import { Contact } from './contact.model';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',

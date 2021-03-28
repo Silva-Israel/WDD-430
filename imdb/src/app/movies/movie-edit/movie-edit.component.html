@@ -98,7 +98,8 @@
             id="actor-entered"
               type="text"
               class="form-control actor"
-              placeholder="Enter actor">
+              placeholder="Enter actor"
+              onfocus="this.value = ''">
           </div>
           <div class="col-xs-2">
             <div
@@ -110,47 +111,13 @@
         </div>
       </div>
 
-      <!-- <div>
-        <label for="cast">Cast:</label>
-        <div class="row">
-          <div class="col-xs-12">
-            <div
-              class="row"
-              *ngFor="let actor of groupActors; let i = index">
-              <div class="col-xs-10">
-                <input
-                  id="add-input"
-                  type="text"
-                  name="{{actor.name}}"
-                  class="form-control"
-                  [ngModel]="actor?.name"
-                  #cast="ngModel"
-                />
-              </div>
-              <div class="col-xs-2">
-                <button
-                  type="button"
-                  class="btn btn-danger"
-                  (click)="onDeleteActor(i)">X</button>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-xs-12">
-                <button
-                  id="add-btn"
-                  type="button"
-                  class="btn btn-success"
-                  (click)="onAddActor()">Add Actor</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
-
       <div id="rating-div" class="row">
         <div class="col-xs-12 form-group">
           <label for="rating">Rating:</label>
             <input
+              minlength="1"
+              maxlength="5"
+              ngModel pattern="[*]*"
               type="text"
               id="rating"
               name="rating"

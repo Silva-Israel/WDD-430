@@ -1,6 +1,7 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subject } from 'rxjs';
+
 import { Movie } from './movie.model';
 
 @Injectable({
@@ -113,7 +114,7 @@ export class MovieService {
   }
 
   sortAndSend() {
-    this.movies.sort((a, b) => a.title < b.title ? 1 : a.title > b.title ? -1 : 0);
+    this.movies.sort((a, b) => a.title < b.title ? -1 : a.title > b.title ? 1 : 0);
     this.movieListChanged.next(this.movies.slice());
   }
 }

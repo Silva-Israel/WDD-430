@@ -36,7 +36,7 @@
       <div class="row">
         <div class="col-xs-12">
           <img
-            [src]="imageUrl.value"
+            [src]="imageUrl?.value"
             class="image-responsive"
             style="max-height: 300px"
           />
@@ -95,7 +95,7 @@
         <div class="row">
           <div class="col-xs-10">
             <input
-            id="actor-entered"
+              id="actor-entered"
               type="text"
               class="form-control actor"
               placeholder="Enter actor"

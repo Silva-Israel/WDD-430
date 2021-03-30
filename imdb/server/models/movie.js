@@ -6,8 +6,8 @@ const movieSchema = mongoose.Schema({
   description: { type: String },
   imageUrl: { type: String },
   rating: { type: String },
-  cast: { type: String},
-  //cast: { type: mongoose.Schema.Types.Array },
+  //cast: { type: String},
+  cast: { type: mongoose.Schema.Types.Array },
   director: { type: String }
   });
 

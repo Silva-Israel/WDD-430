@@ -66,8 +66,14 @@ export class DocumentEditComponent implements OnInit {
     } else {
       this.documentService.addDocument(newDocument);
     }
-    this.router.navigate(['/documents', newDocument.id], {
-      relativeTo: this.route });
+
+    if(newDocument.id) {
+      this.router.navigate(['/documents', newDocument.id], {
+        relativeTo: this.route
+      });
+    } else {
+      this.onCancel();
+    }
   }
 
   onCancel() {

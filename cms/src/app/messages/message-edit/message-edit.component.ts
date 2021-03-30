@@ -37,8 +37,11 @@ export class MessageEditComponent implements OnInit {
       msgTxt,
       this.currentSender
     );
+
     this.messageService.addMessage(newMessage);
     this.onClear();
+
+    this.messageService.getMessages();
   }
 
   onClear() {

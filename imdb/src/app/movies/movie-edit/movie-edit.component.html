@@ -130,6 +130,15 @@
       </div>
 
       <div class="row">
+        <div class="col-xs-12">
+          <p
+            id="message"
+            class="alert alert-danger"
+            *ngIf="rating.dirty && rating.invalid && rating.value != '*'">Please, enter the asterisk (*) symbol</p>
+        </div>
+      </div>
+
+      <div class="row">
         <div class="col-xs-12 btn-toolbar">
           <button
             class="btn btn-success"

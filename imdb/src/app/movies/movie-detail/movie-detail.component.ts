@@ -30,7 +30,7 @@ export class MovieDetailComponent implements OnInit {
               response => {
                 this.movie = response.movie;
 
-                this.onRate(this.id);
+                this.onRate();
               }
             )
         }
@@ -45,28 +45,35 @@ export class MovieDetailComponent implements OnInit {
 
   onDelete() {
     this.movieService.deleteMovie(this.movie);
+
     this.router.navigateByUrl('movies');
 
     this.movieService.getMovies();
+
+    this.router.navigate(['/movies']);
   }
 
-  onRate(id: string) {
+  onRate() {
+    let container = document.getElementById('star-rating');
+
     switch(this.movie?.rating) {
       case '*':
-        document.getElementById('star-rating').innerHTML = '&#9733;';
+        container.innerHTML = '&#9733;';
         break;
       case '**':
-        document.getElementById('star-rating').innerHTML = '&#9733; &#9733;';
+        container.innerHTML = '&#9733; &#9733;';
         break;
       case '***':
-        document.getElementById('star-rating').innerHTML = '&#9733; &#9733; &#9733;';
+        container.innerHTML = '&#9733; &#9733; &#9733;';
         break;
       case '****':
-        document.getElementById('star-rating').innerHTML = '&#9733; &#9733; &#9733; &#9733;';
+        container.innerHTML = '&#9733; &#9733; &#9733; &#9733;';
         break;
       case '*****':
-        document.getElementById('star-rating').innerHTML = '&#9733; &#9733; &#9733; &#9733; &#9733;';
+        container.innerHTML = '&#9733; &#9733; &#9733; &#9733; &#9733;';
         break;
+      default:
+        container.innerHTML = '';
     }
   }
 }

@@ -76,9 +76,13 @@ export class MovieEditComponent implements OnInit {
       this.movieService.addMovie(newMovie);
     }
 
-    this.router.navigate(['/movies', newMovie.id], {
-      relativeTo: this.route
-    });
+    if(newMovie.id) {
+      this.router.navigate(['/movies', newMovie.id], {
+        relativeTo: this.route
+      });
+    } else {
+      this.onCancel();
+    }
   }
 
   onCancel() {
@@ -92,8 +96,6 @@ export class MovieEditComponent implements OnInit {
     if(newActor) {
       this.groupActors.push(newActor);
     }
-
-    newActor = '';
   }
 
   onDeleteActor(index: number) {

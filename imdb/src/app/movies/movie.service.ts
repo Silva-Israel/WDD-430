@@ -32,6 +32,7 @@ export class MovieService {
   getMovies() {
     this.http
       .get<{ message: string; movies: Movie[] }>('http://localhost:3000/movies')
+      //.get<{ message: string; movies: Movie[] }>('mongodb+srv://Silva:ICfj12481632@silvai.llhik.mongodb.net/imdb/movies?retryWrites=true&w=majority')
         .subscribe(
           (response) => {
             this.movies = response.movies;
@@ -46,6 +47,7 @@ export class MovieService {
   getMovie(id: string) {
     return this.http
       .get<{ message: string; movie: Movie }>('http://localhost:3000/movies/' + id);
+      //.get<{ message: string; movie: Movie }>('mongodb+srv://Silva:ICfj12481632@silvai.llhik.mongodb.net/imdb/movies/' + id + '?retryWrites=true&w=majority');
   }
 
   addMovie(newMovie: Movie) {

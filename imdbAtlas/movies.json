@@ -1,0 +1,153 @@
+[{
+  "_id": {
+    "$oid": "605c2a3e3afc6128580287d2"
+  },
+  "title": "Inception",
+  "description": "A movie about dreams inside dreams inside dreams.",
+  "imageUrl": "https://resizing.flixster.com/4MrL62heb7yBgBt8zllSeqNZxg4=/206x305/v2/https://flxt.tmsimg.com/assets/p7825626_p_v10_af.jpg",
+  "rating": "****",
+  "cast": [
+    "Leonardo DiCaprio",
+    "Tom Hardy",
+    "Joseph Gordon-Levitt",
+    "Woman"
+  ],
+  "director": "Christopher Nolan",
+  "id": "1"
+},{
+  "_id": {
+    "$oid": "605c2a3e3afc6128580287d3"
+  },
+  "title": "The Lord of the Rings: The Fellowship of the Ring",
+  "description": "The first in this incredible trilogy.",
+  "imageUrl": "https://m.media-amazon.com/images/M/MV5BN2EyZjM3NzUtNWUzMi00MTgxLWI0NTctMzY4M2VlOTdjZWRiXkEyXkFqcGdeQXVyNDUzOTQ5MjY@._V1_.jpg",
+  "rating": "*****",
+  "cast": [
+    "Frodo Baggins",
+    "Gandalf The Grey",
+    "The Balrog"
+  ],
+  "director": "Peter Jackson",
+  "id": "2"
+},{
+  "_id": {
+    "$oid": "605e553012a46f7f142b650a"
+  },
+  "cast": [
+    "Ralph Fiennes",
+    "Jude Law"
+  ],
+  "id": "127",
+  "title": "The Grand Budapest Hotel",
+  "description": "A colorful movie about one of Eastern Europe's quirkiest hotels.",
+  "imageUrl": "https://m.media-amazon.com/images/I/51G-6nEIH8L._AC_.jpg",
+  "director": "Wes Anderson",
+  "rating": "*****",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605e5f2f12a46f7f142b6510"
+  },
+  "cast": [
+    "Little Girl",
+    "T-Rex",
+    "Old Dude"
+  ],
+  "id": "133",
+  "title": "Jurassic Park",
+  "description": "Should dinosaurs be brought back?",
+  "imageUrl": "https://image.posterlounge.com/images/l/1894261.jpg",
+  "director": "Steven Spielberg",
+  "rating": "*****",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605e618e12a46f7f142b6511"
+  },
+  "cast": [
+    "SpongeBob",
+    "Patrick"
+  ],
+  "id": "134",
+  "title": "The SpongeBob Movie: Sponge on the Run",
+  "description": "Gary was kidnapped by Poseidon and Spongebob and his friends go on an adventure to rescue him.",
+  "imageUrl": "https://miro.medium.com/max/1000/0*Ls9iPQ9xZ1bQquWw.jpg",
+  "director": "Tim Hill",
+  "rating": "***",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605ef1be12a46f7f142b6513"
+  },
+  "cast": [
+    "Audrey T",
+    "Photo-Booth Guy"
+  ],
+  "id": "136",
+  "title": "Amelie",
+  "description": "A French movie.",
+  "imageUrl": "https://images-na.ssl-images-amazon.com/images/I/51t3yxtcpsL._AC_.jpg",
+  "director": "Jean Pierre",
+  "rating": "*****",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60602bf012a46f7f142b651a"
+  },
+  "cast": [
+    "Hugh Jackman",
+    "Christian Bale"
+  ],
+  "id": "143",
+  "title": "The Prestige",
+  "description": "Two fanatics have a life-long feud over who is the better magician.",
+  "imageUrl": "https://i.pinimg.com/736x/35/66/3b/35663bd80d174c1f251d9d1d3f793b9c.jpg",
+  "director": "Christopher Nolan",
+  "rating": "*****",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "606030f512a46f7f142b651b"
+  },
+  "cast": [
+    "Hugh Jackman",
+    "James McAvoy"
+  ],
+  "id": "144",
+  "title": "X-Men: Days of Future Past",
+  "description": "Wolverine goes back in time to save the future.",
+  "imageUrl": "https://images-na.ssl-images-amazon.com/images/I/91rYVUCEopL._AC_SL1500_.jpg",
+  "director": "Bryan Singer",
+  "rating": "*****",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "606031a912a46f7f142b651c"
+  },
+  "cast": [
+    "Christian Bale",
+    "Heath Ledger"
+  ],
+  "id": "145",
+  "title": "The Dark Knight",
+  "description": "Batman tries to save Gotham.",
+  "imageUrl": "https://play-lh.googleusercontent.com/auIs5tjWlLYaFPGClZOJ7m5YVbnX6uBvz0X02r8TkwFKdzE53ww2MqWSS9gU0YNqoYwvpg=w200-h300-rw",
+  "director": "Christopher Nolan",
+  "rating": "****",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6062d2b0fc626315bc6af3b5"
+  },
+  "cast": [
+    "Marty McFly",
+    "Emmet Brown"
+  ],
+  "id": "181",
+  "title": "Back to the Future",
+  "description": "What would happen if you went back in time and met your parents in high school?",
+  "imageUrl": "https://resizing.flixster.com/JABjnn-KhoEu2-4aS3XNAyGzeGk=/ems.ZW1zLXByZC1hc3NldHMvbW92aWVzLzJiYTdhYWRiLWE2ZmItNGU4ZS05ZmNlLWFjNTBlMjM2MDQ3MS53ZWJw",
+  "director": "Robert Zemeckis",
+  "rating": "*****",
+  "__v": 0
+}]

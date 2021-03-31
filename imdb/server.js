@@ -46,8 +46,13 @@ app.use('/', index);
 app.use('/movies', movieRoutes);
 
 // Establish a connection to the mongo database
-mongoose.connect('mongodb://localhost:27017/imdb',
-   { useNewUrlParser: true }, (err, res) => {
+// mongoose.connect('mongodb://localhost:27017/imdb',
+mongoose.connect('mongodb+srv://Silva:ICfj12481632@silvai.llhik.mongodb.net/imdb?retryWrites=true&w=majority',
+   {
+     useNewUrlParser: true,
+     useFindAndModify: false,
+     useUnifiedTopology: true
+   }, (err, res) => {
       if (err) {
          console.log('Connection failed: ' + err);
       }

@@ -1,5 +1,13 @@
 # Cms
 
+## About
+
+This is a project I worked on for a Full-Stack Development class.
+I used VS Code to write all of my code in Angular, Node.JS, Express, and MongoDB.
+This web app shows all I learned and I think it reflects very well what I can do with Angular and the MEAN stack.
+
+## Auto-Generated
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.6.
 
 ## Development server

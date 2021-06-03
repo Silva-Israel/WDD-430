@@ -31,8 +31,8 @@ export class MovieService {
 
   getMovies() {
     this.http
-      .get<{ message: string; movies: Movie[] }>('http://localhost:3000/movies')
-      //.get<{ message: string; movies: Movie[] }>('mongodb+srv://Silva:ICfj12481632@silvai.llhik.mongodb.net/imdb/movies?retryWrites=true&w=majority')
+      //.get<{ message: string; movies: Movie[] }>('http://localhost:3000/movies')
+      .get<{ message: string; movies: Movie[] }>('http://imdbangular-env.eba-2mcw8wqa.us-west-2.elasticbeanstalk.com/movies')
         .subscribe(
           (response) => {
             this.movies = response.movies;
@@ -46,8 +46,8 @@ export class MovieService {
 
   getMovie(id: string) {
     return this.http
-      .get<{ message: string; movie: Movie }>('http://localhost:3000/movies/' + id);
-      //.get<{ message: string; movie: Movie }>('mongodb+srv://Silva:ICfj12481632@silvai.llhik.mongodb.net/imdb/movies/' + id + '?retryWrites=true&w=majority');
+      //.get<{ message: string; movie: Movie }>('http://localhost:3000/movies/' + id);
+      .get<{ message: string; movie: Movie }>('http://imdbangular-env.eba-2mcw8wqa.us-west-2.elasticbeanstalk.com/movies' + id);
   }
 
   addMovie(newMovie: Movie) {
@@ -59,7 +59,8 @@ export class MovieService {
 
     const headers = new HttpHeaders({'Content-Type':'application/json'});
 
-    this.http.post<{ message: string, movie: Movie }>('http://localhost:3000/movies',
+    //this.http.post<{ message: string, movie: Movie }>('http://localhost:3000/movies',
+    this.http.post<{ message: string, movie: Movie }>('http://imdbangular-env.eba-2mcw8wqa.us-west-2.elasticbeanstalk.com/movies',
       newMovie,
       { headers: headers })
         .subscribe(
@@ -85,7 +86,8 @@ export class MovieService {
 
     const headers = new HttpHeaders({'Content-Type':'application/json'});
 
-    this.http.put('http://localhost:3000/movies/' + originalMovie.id,
+    //this.http.put('http://localhost:3000/movies/' + originalMovie.id,
+    this.http.put('http://imdbangular-env.eba-2mcw8wqa.us-west-2.elasticbeanstalk.com/movies/' + originalMovie.id,
       newMovie, { headers: headers })
         .subscribe(
           (response: Response) => {
@@ -106,7 +108,8 @@ export class MovieService {
       return;
     }
 
-    this.http.delete('http://localhost:3000/movies/' + movie.id)
+    //this.http.delete('http://localhost:3000/movies/' + movie.id)
+    this.http.delete('http://imdbangular-env.eba-2mcw8wqa.us-west-2.elasticbeanstalk.com/movies/' + movie.id)
       .subscribe(
         (response) => {
           this.movies.splice(pos, 1);

@@ -8,10 +8,10 @@ var logger = require('morgan');
 var mongoose = require('mongoose');
 
 // Import the routing file to handle the default (index) route
-var index = require('./server/routes/app');
+var index = require('./routes/app');
 
 // ... ADD CODE TO IMPORT YOUR ROUTING FILES HERE ...
-const movieRoutes = require('./server/routes/movies');
+const movieRoutes = require('./routes/movies');
 
 var app = express(); // create an instance of express
 

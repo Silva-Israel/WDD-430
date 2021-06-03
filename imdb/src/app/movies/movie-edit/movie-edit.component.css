@@ -52,3 +52,7 @@ img {
 #buttonGreen {
   margin-left: -10px;
 }
+
+.alert {
+  padding: 7px;
+}

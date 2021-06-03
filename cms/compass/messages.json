@@ -1,0 +1,73 @@
+[{
+  "_id": {
+    "$oid": "6051802b478b1d7ebc31689c"
+  },
+  "id": "1",
+  "subject": "CIT 366 assignment 1",
+  "msgText": "The grades for this assignment have been posted.",
+  "sender": {
+    "$oid": "58c767386f1d58ebc37af1e9"
+  }
+},{
+  "_id": {
+    "$oid": "6051802b478b1d7ebc31689d"
+  },
+  "id": "2",
+  "subject": "CIT 366 assignment 3",
+  "msgText": "When is assignment 3 due?",
+  "sender": {
+    "$oid": "58c767386f1d58ebc37af1ea"
+  }
+},{
+  "_id": {
+    "$oid": "6051802b478b1d7ebc31689e"
+  },
+  "id": "3",
+  "subject": "CIT 366 assignment 3 due date",
+  "msgText": "Assignment 3 is due on Saturday at 11:30 PM.",
+  "sender": {
+    "$oid": "58c767386f1d58ebc37af1e9"
+  }
+},{
+  "_id": {
+    "$oid": "6051802b478b1d7ebc31689f"
+  },
+  "id": "4",
+  "subject": "Assignment 3 help",
+  "msgText": "Can I meet with you sometime? I need help with assignment 3.",
+  "sender": {
+    "$oid": "58c767386f1d58ebc37af1eb"
+  }
+},{
+  "_id": {
+    "$oid": "6051802b478b1d7ebc3168a0"
+  },
+  "id": "5",
+  "subject": "Assignment 3 help",
+  "msgText": "I can meet with you today at 4:00 PM in my office.",
+  "sender": {
+    "$oid": "58c767386f1d58ebc37af1ed"
+  }
+},{
+  "_id": {
+    "$oid": "6062c16aaa98521d745adcf2"
+  },
+  "id": "109",
+  "subject": "New test message",
+  "msgText": "This is my final message to test the sender update.",
+  "sender": {
+    "$oid": "6051821f478b1d7ebc3168a3"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6062c3a3aa98521d745adcf7"
+  },
+  "id": "110",
+  "subject": "New message",
+  "msgText": "This is my message for the video",
+  "sender": {
+    "$oid": "6051821f478b1d7ebc3168a3"
+  },
+  "__v": 0
+}]

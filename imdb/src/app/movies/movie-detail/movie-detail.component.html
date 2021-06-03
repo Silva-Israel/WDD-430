@@ -10,8 +10,19 @@
             class="col-md-7"
           />
           <div class="col-md-5">
-            <a [routerLink]="['edit']" class="btn btn-primary" (click)="onEditMovie()">Edit</a>
-            <a class="btn btn-danger" (click)="onDelete()">Delete</a>
+            <a
+              [routerLink]="['edit']"
+              class="btn btn-primary"
+              (click)="onEditMovie()"
+              data-toggle="tooltip"
+              data-placement="top"
+              title="Edit movie details">Edit</a>
+            <a
+              class="btn btn-danger"
+              (click)="onDelete()"
+              data-toggle="tooltip"
+              data-placement="top"
+              title="Delete movie">Delete</a>
           </div>
         </div>
       </div>
@@ -30,8 +41,12 @@
                 </li>
               </ul>
               <div class="rat">
-                <p class=""><strong>Rating: </strong></p>
-                <p id="star-rating" class="">{{ movie?.rating }}</p>
+                <p><strong>Rating: </strong></p>
+                <p
+                  class="star-rating"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Movie rating out of 5 stars">{{ movie?.rating }}</p>
               </div>
             </div>
           </div>

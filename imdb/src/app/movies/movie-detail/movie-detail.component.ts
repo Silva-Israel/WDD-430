@@ -54,26 +54,30 @@ export class MovieDetailComponent implements OnInit {
   }
 
   onRate() {
-    let container = document.getElementById('star-rating');
+    let container = document.querySelector('.star-rating');
 
-    switch(this.movie?.rating) {
-      case '*':
-        container.innerHTML = '&#9733;';
-        break;
-      case '**':
-        container.innerHTML = '&#9733; &#9733;';
-        break;
-      case '***':
-        container.innerHTML = '&#9733; &#9733; &#9733;';
-        break;
-      case '****':
-        container.innerHTML = '&#9733; &#9733; &#9733; &#9733;';
-        break;
-      case '*****':
-        container.innerHTML = '&#9733; &#9733; &#9733; &#9733; &#9733;';
-        break;
-      default:
-        container.innerHTML = '';
+    if(!this.movie.rating) {
+      container.innerHTML = '<span style="color: black; font-size: .8em;">Not yet rated<span>';
+    } else {
+      switch(this.movie?.rating) {
+        case '*':
+          container.innerHTML = '&#9733; &#9734; &#9734; &#9734; &#9734;';
+          break;
+        case '**':
+          container.innerHTML = '&#9733; &#9733; &#9734; &#9734; &#9734;';
+          break;
+        case '***':
+          container.innerHTML = '&#9733; &#9733; &#9733; &#9734; &#9734;';
+          break;
+        case '****':
+          container.innerHTML = '&#9733; &#9733; &#9733; &#9733; &#9734;';
+          break;
+        case '*****':
+          container.innerHTML = '&#9733; &#9733; &#9733; &#9733; &#9733;';
+          break;
+        default:
+          container.innerHTML = '';
+      }
     }
   }
 }

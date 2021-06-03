@@ -90,7 +90,10 @@
           <div
             id="buttonRed"
             class="col-xs-2 button"
-            (click)="onDeleteActor(i)">X</div>
+            (click)="onDeleteActor(i)"
+            data-toggle="tooltip"
+            data-placement="top"
+            title="Delete actor">X</div>
         </div>
         <div class="row">
           <div class="col-xs-10">
@@ -106,7 +109,10 @@
               id="buttonGreen"
               type="button"
               class="btn btn-success actor"
-              (click)="onAddActor()">Add</div>
+              (click)="onAddActor()"
+              data-toggle="tooltip"
+              data-placement="top"
+              title="Add actor entered">Add</div>
           </div>
         </div>
       </div>
@@ -134,7 +140,7 @@
           <p
             id="message"
             class="alert alert-danger"
-            *ngIf="rating.dirty && rating.invalid && rating.value != '*'">Please, enter the asterisk (*) symbol</p>
+            *ngIf="rating.dirty && rating.invalid && rating.value != '*'">Please, enter only the asterisk (*) symbol</p>
         </div>
       </div>
 
@@ -143,11 +149,17 @@
           <button
             class="btn btn-success"
             type="submit"
-            [disabled]="!f.valid">Save</button>
+            [disabled]="!f.valid"
+            data-toggle="tooltip"
+            data-placement="top"
+            title="Save changes">Save</button>
           <button
             class="btn btn-primary"
             type="button"
-            (click)="onCancel()">Cancel</button>
+            (click)="onCancel()"
+            data-toggle="tooltip"
+            data-placement="top"
+            title="Cancel changes">Cancel</button>
         </div>
       </div>
     </form>

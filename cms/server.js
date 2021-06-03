@@ -50,7 +50,8 @@ app.use('/contacts', contactRoutes);
 app.use('/documents', documentRoutes);
 
 // Establish a connection to the mongo database
-mongoose.connect('mongodb://localhost:27017/cms',
+//mongoose.connect('mongodb://localhost:27017/cms',
+mongoose.connect('mongodb+srv://Silva:ICfj12481632@silvai.llhik.mongodb.net/cms?retryWrites=true&w=majority',
    { useNewUrlParser: true }, (err, res) => {
       if (err) {
          console.log('Connection failed: ' + err);

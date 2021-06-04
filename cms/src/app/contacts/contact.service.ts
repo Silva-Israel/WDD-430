@@ -12,6 +12,7 @@ export class ContactService {
   contactListChanged = new Subject<Contact[]>();
   contacts: Contact[] = [];
   maxContactId: number;
+  url: string = "http://cmsangular-env.eba-dt649ppq.us-west-2.elasticbeanstalk.com/contacts";
 
   constructor(private http: HttpClient) {
     this.getContacts();
@@ -30,7 +31,8 @@ export class ContactService {
   }
 
   getContacts() {
-    this.http.get<{ message: string, contacts: Contact[] }>('http://localhost:3000/contacts')
+    //this.http.get<{ message: string, contacts: Contact[] }>('http://localhost:3000/contacts')
+    this.http.get<{ message: string, contacts: Contact[] }>(this.url)
       .subscribe(
         // Success
         (responseData) => {
@@ -45,7 +47,8 @@ export class ContactService {
   }
 
   getContact(id: string) {
-    return this.http.get<{ message: string, contact: Contact }>('http://localhost:3000/contacts/' + id);
+    //return this.http.get<{ message: string, contact: Contact }>('http://localhost:3000/contacts/' + id);
+    return this.http.get<{ message: string, contact: Contact }>(this.url + '/' + id);
   }
 
   addContact(newContact: Contact) {
@@ -57,7 +60,8 @@ export class ContactService {
 
     const headers = new HttpHeaders({'Content-Type':'application/json'});
 
-    this.http.post<{ message: string, contact: Contact }>('http://localhost:3000/contacts',
+    //this.http.post<{ message: string, contact: Contact }>('http://localhost:3000/contacts',
+    this.http.post<{ message: string, contact: Contact }>(this.url,
       newContact,
       { headers: headers })
         .subscribe(
@@ -83,7 +87,8 @@ export class ContactService {
 
     const headers = new HttpHeaders({'Content-Type':'application/json'});
 
-    this.http.put('http://localhost:3000/contacts/' + originalContact.id,
+    //this.http.put('http://localhost:3000/contacts/' + originalContact.id,
+    this.http.put(this.url + '/' + originalContact.id,
       newContact, { headers: headers})
         .subscribe(
           (response: Response) => {
@@ -104,7 +109,8 @@ export class ContactService {
       return;
     }
 
-    this.http.delete('http://localhost:3000/contacts/' + contact.id)
+    //this.http.delete('http://localhost:3000/contacts/' + contact.id)
+    this.http.delete(this.url + '/' + contact.id)
       .subscribe(
         (response: Response) => {
           this.contacts.splice(pos, 1);

@@ -11,6 +11,7 @@ export class MessageService {
   messageChangedEvent = new EventEmitter<Message[]>();
   private messages: Message[] = [];
   maxMessageId: number;
+  url: string = "http://cmsangular-env.eba-dt649ppq.us-west-2.elasticbeanstalk.com/messages";
 
   constructor(private http: HttpClient) {
     this.getMessages();
@@ -32,7 +33,8 @@ export class MessageService {
   }
 
   getMessages() {
-    this.http.get<{ message: string, messages: Message[] }>('http://localhost:3000/messages')
+    //this.http.get<{ message: string, messages: Message[] }>('http://localhost:3000/messages')
+    this.http.get<{ message: string, messages: Message[] }>(this.url)
       .subscribe(
         (responseData) => {
           this.messages = responseData.messages;
@@ -45,7 +47,8 @@ export class MessageService {
   }
 
   getMessage(id: string) {
-    return this.http.get<{ messageS: string, message: Message }>('http://localhost:3000/messages/' + id);
+    //return this.http.get<{ messageS: string, message: Message }>('http://localhost:3000/messages/' + id);
+    return this.http.get<{ messageS: string, message: Message }>(this.url + '/' + id);
   }
 
   addMessage(newMessage: Message) {
@@ -57,7 +60,8 @@ export class MessageService {
 
     const headers = new HttpHeaders({ 'Content-Type':'application/json' });
 
-    this.http.post<{ messageString: string, message: Message }>('http://localhost:3000/messages',
+    //this.http.post<{ messageString: string, message: Message }>('http://localhost:3000/messages',
+    this.http.post<{ messageString: string, message: Message }>(this.url,
       newMessage,
       { headers: headers})
         .subscribe(

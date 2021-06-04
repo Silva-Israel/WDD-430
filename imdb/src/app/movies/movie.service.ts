@@ -47,7 +47,7 @@ export class MovieService {
   getMovie(id: string) {
     return this.http
       //.get<{ message: string; movie: Movie }>('http://localhost:3000/movies/' + id);
-      .get<{ message: string; movie: Movie }>('http://imdbangular-env.eba-2mcw8wqa.us-west-2.elasticbeanstalk.com/movies' + id);
+      .get<{ message: string; movie: Movie }>('http://imdbangular-env.eba-2mcw8wqa.us-west-2.elasticbeanstalk.com/movies/' + id);
   }
 
   addMovie(newMovie: Movie) {
